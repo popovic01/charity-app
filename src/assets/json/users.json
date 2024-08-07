@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "name": "John Smith",
+      "email": "john.smith@example.com",
+      "password": "password123",
+      "isAdmin": false
+    },
+    {
+      "name": "Sally Johnson",
+      "email": "sally.johnson@example.com",
+      "password": "securepass456",
+      "isAdmin": false
+    },
+    {
+      "name": "Alice Brown",
+      "email": "alice.brown@example.com",
+      "password": "alicepwd789",
+      "isAdmin": true
+    },
+    {
+      "name": "Bob Davis",
+      "email": "bob.davis@example.com",
+      "password": "bobsecure000",
+      "isAdmin": false
+    }
+  ]
+}
