@@ -33,11 +33,12 @@
                 digit, and one special character
               </p>
             </div>
+            <p v-if="formValidation.isUserRegistered && isFormSubmitted" class="text-danger">
+              A user with that email address already exists
+            </p>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary me-2" @click="$emit('login')">
-              Sign up
-            </button>
+            <button type="submit" class="btn btn-primary me-2">Sign up</button>
           </div>
         </form>
       </div>
@@ -55,6 +56,8 @@
 <script setup>
 import { ref } from 'vue'
 
+const emit = defineEmits(['register'])
+
 const isFormSubmitted = ref(false)
 
 const getInitialData = () => ({
@@ -67,7 +70,8 @@ const getInitialData = () => ({
 const getInitialValidation = () => ({
   isEmailValid: false,
   isNameValid: false,
-  isPasswordValid: false
+  isPasswordValid: false,
+  isUserRegistered: false
 })
 
 const formData = ref(getInitialData())
@@ -85,6 +89,12 @@ const submitForm = () => {
     formValidation.value.isPasswordValid &&
     formValidation.value.isNameValid
   ) {
+    //check if user already exists
+    if (users.value.some((user) => user.email === formData.value.email)) {
+      formValidation.value.isUserRegistered = true
+      return
+    }
+    emit('register')
     users.value.push({
       ...formData.value
     })
@@ -123,13 +133,11 @@ function checkValidation() {
   } else {
     formValidation.value.isPasswordValid = true
   }
-  console.log(formValidation.value)
 }
 
 function clearForm() {
   formData.value = getInitialData()
   formValidation.value = getInitialValidation()
-  localStorage.removeItem('currentUser')
   isFormSubmitted.value = false
 }
 </script>
