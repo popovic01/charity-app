@@ -17,8 +17,19 @@
               <label for="email" class="form-label">Email</label>
               <input type="text" class="form-control" id="email" v-model="formData.email" />
             </div>
-            <p v-if="!formValidation.isEmailValid && isFormSubmitted" class="text-danger">
+            <p v-if="!formValidation.isEmailEntered && isFormSubmitted" class="text-danger">
+              Email is required
+            </p>
+            <p
+              v-if="
+                formValidation.isEmailEntered && !formValidation.isEmailValid && isFormSubmitted
+              "
+              class="text-danger"
+            >
               Email is not valid
+            </p>
+            <p v-if="formValidation.isUserRegistered && isFormSubmitted" class="text-danger">
+              A user with that email address already exists
             </p>
             <div class="col-md-7 mb-2">
               <label for="password" class="form-label">Password</label>
@@ -28,14 +39,21 @@
                 id="password"
                 v-model="formData.password"
               />
-              <p v-if="!formValidation.isPasswordValid && isFormSubmitted" class="text-danger">
+              <p v-if="!formValidation.isPasswordEntered && isFormSubmitted" class="text-danger">
+                Password is required
+              </p>
+              <p
+                v-if="
+                  formValidation.isPasswordEntered &&
+                  !formValidation.isPasswordValid &&
+                  isFormSubmitted
+                "
+                class="text-danger"
+              >
                 Password must be 8-22 characters long, containing at least one uppercase letter, one
                 digit, and one special character
               </p>
             </div>
-            <p v-if="formValidation.isUserRegistered && isFormSubmitted" class="text-danger">
-              A user with that email address already exists
-            </p>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Sign up</button>
@@ -55,6 +73,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { users } from '../assets/data/users.js'
 
 const emit = defineEmits(['register'])
 
@@ -77,8 +96,6 @@ const getInitialValidation = () => ({
 const formData = ref(getInitialData())
 const formValidation = ref(getInitialValidation())
 
-const users = ref([])
-
 const submitForm = () => {
   checkValidation()
   isFormSubmitted.value = true
@@ -86,16 +103,14 @@ const submitForm = () => {
   //the validation is correct
   if (
     formValidation.value.isEmailValid &&
+    formValidation.value.isEmailEntered &&
     formValidation.value.isPasswordValid &&
-    formValidation.value.isNameValid
+    formValidation.value.isPasswordEntered &&
+    formValidation.value.isNameValid &&
+    !formValidation.value.isUserRegistered
   ) {
-    //check if user already exists
-    if (users.value.some((user) => user.email === formData.value.email)) {
-      formValidation.value.isUserRegistered = true
-      return
-    }
     emit('register')
-    users.value.push({
+    users.push({
       ...formData.value
     })
     localStorage.setItem('currentUser', JSON.stringify(formData.value))
@@ -112,26 +127,33 @@ function checkValidation() {
   let upperCharRegex = new RegExp(/^(?=.*[A-Z]).*$/m)
   let numericCharRegex = new RegExp(/^(?=.*\d).*$/m)
 
-  if (!formData.value.email || !emailRegex.test(formData.value.email)) {
-    formValidation.value.isEmailValid = false
-  } else {
+  if (formData.value.email) {
+    formValidation.value.isEmailEntered = true
+  }
+
+  if (emailRegex.test(formData.value.email)) {
     formValidation.value.isEmailValid = true
   }
-  if (!formData.value.name) {
-    formValidation.value.isNameValid = false
-  } else {
+
+  if (formData.value.name) {
     formValidation.value.isNameValid = true
   }
+
+  if (formData.value.password) {
+    formValidation.value.isPasswordEntered = true
+  }
+
   if (
-    !formData.value.password ||
-    !lengthRegex.test(formData.value.password) ||
-    !specialCharRegex.test(formData.value.password) ||
-    !upperCharRegex.test(formData.value.password) ||
-    !numericCharRegex.test(formData.value.password)
+    lengthRegex.test(formData.value.password) &&
+    specialCharRegex.test(formData.value.password) &&
+    upperCharRegex.test(formData.value.password) &&
+    numericCharRegex.test(formData.value.password)
   ) {
-    formValidation.value.isPasswordValid = false
-  } else {
     formValidation.value.isPasswordValid = true
+  }
+
+  if (users.some((user) => user.email === formData.value.email)) {
+    formValidation.value.isUserRegistered = true
   }
 }
 
