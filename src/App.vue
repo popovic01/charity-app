@@ -1,14 +1,26 @@
 <script setup>
+import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import SignUp from './components/SignUp.vue'
+import SignIn from './components/SignIn.vue'
+
+const isLoggedIn = ref(false)
+
+function changeIsLoggedIn() {
+  isLoggedIn.value = !isLoggedIn.value
+  if (!isLoggedIn.value) {
+    localStorage.removeItem('currentUser')
+  }
+}
 </script>
 
 <template>
   <header></header>
 
   <main>
-    <NavBar></NavBar>
-    <SignUp></SignUp>
+    <NavBar :isLoggedIn="isLoggedIn" @logout="changeIsLoggedIn"></NavBar>
+    <SignUp @register="changeIsLoggedIn"></SignUp>
+    <SignIn @login="changeIsLoggedIn"></SignIn>
   </main>
 </template>
 

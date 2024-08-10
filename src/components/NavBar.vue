@@ -27,14 +27,19 @@
         <li class="nav-item">
           <a class="nav-link" href="#">About Us</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">User Account</a>
+        <li class="nav-item" v-if="!isLoggedIn">
+          <a class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item" v-else>
+          <a class="nav-link" href="#" @click="$emit('logout')">Logout</a>
         </li>
       </ul>
     </div>
   </nav>
 </template>
 
-<script></script>
+<script setup>
+defineProps(['isLoggedIn'])
+</script>
 
 <style></style>
