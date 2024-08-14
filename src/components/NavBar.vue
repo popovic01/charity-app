@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Health Resources</a>
@@ -28,7 +28,10 @@
           <a class="nav-link" href="#">About Us</a>
         </li>
         <li class="nav-item" v-if="!isLoggedIn">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" href="/sign-in">Sign in</a>
+        </li>
+        <li class="nav-item" v-if="!isLoggedIn">
+          <a class="nav-link" href="/sign-up">Sign up</a>
         </li>
         <li class="nav-item" v-else>
           <a class="nav-link" href="#" @click="$emit('logout')">Logout</a>
