@@ -10,7 +10,7 @@
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" v-model="formData.name" />
               <p v-if="!formValidation.isNameValid && isFormSubmitted" class="text-danger">
-                Name is required
+                Name is required.
               </p>
             </div>
             <div class="col-md-7 mb-2">
@@ -18,7 +18,7 @@
               <input type="text" class="form-control" id="email" v-model="formData.email" />
             </div>
             <p v-if="!formValidation.isEmailEntered && isFormSubmitted" class="text-danger">
-              Email is required
+              Email is required.
             </p>
             <p
               v-if="
@@ -26,10 +26,10 @@
               "
               class="text-danger"
             >
-              Email is not valid
+              Email is not valid.
             </p>
             <p v-if="formValidation.isUserRegistered && isFormSubmitted" class="text-danger">
-              A user with that email address already exists
+              A user with that email address already exists.
             </p>
             <div class="col-md-7 mb-2">
               <label for="password" class="form-label">Password</label>
@@ -40,7 +40,7 @@
                 v-model="formData.password"
               />
               <p v-if="!formValidation.isPasswordEntered && isFormSubmitted" class="text-danger">
-                Password is required
+                Password is required.
               </p>
               <p
                 v-if="
@@ -51,7 +51,7 @@
                 class="text-danger"
               >
                 Password must be 8-22 characters long, containing at least one uppercase letter, one
-                digit, and one special character
+                digit, and one special character.
               </p>
             </div>
           </div>
@@ -129,18 +129,26 @@ function checkValidation() {
 
   if (formData.value.email) {
     formValidation.value.isEmailEntered = true
+  } else {
+    formValidation.value.isEmailEntered = false
   }
 
   if (emailRegex.test(formData.value.email)) {
     formValidation.value.isEmailValid = true
+  } else {
+    formValidation.value.isEmailValid = false
   }
 
   if (formData.value.name) {
     formValidation.value.isNameValid = true
+  } else {
+    formValidation.value.isNameValid = false
   }
 
   if (formData.value.password) {
     formValidation.value.isPasswordEntered = true
+  } else {
+    formValidation.value.isPasswordEntered = false
   }
 
   if (
@@ -150,10 +158,14 @@ function checkValidation() {
     numericCharRegex.test(formData.value.password)
   ) {
     formValidation.value.isPasswordValid = true
+  } else {
+    formValidation.value.isPasswordValid = false
   }
 
   if (users.some((user) => user.email === formData.value.email)) {
     formValidation.value.isUserRegistered = true
+  } else {
+    formValidation.value.isUserRegistered = false
   }
 }
 

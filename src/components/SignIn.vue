@@ -11,7 +11,7 @@
               <input type="text" class="form-control" id="email" v-model="formData.email" />
             </div>
             <p v-if="!formValidation.isEmailValid && isFormSubmitted" class="text-danger">
-              Email is not valid
+              Email is not valid.
             </p>
             <p
               v-if="
@@ -19,7 +19,7 @@
               "
               class="text-danger"
             >
-              A user with that email address doesn't exists
+              A user with that email address doesn't exists.
             </p>
             <div class="col-md-7 mb-2">
               <label for="password" class="form-label">Password</label>
@@ -30,7 +30,7 @@
                 v-model="formData.password"
               />
               <p v-if="!formValidation.isPasswordValid && isFormSubmitted" class="text-danger">
-                Password is required
+                Password is required.
               </p>
               <p
                 v-if="
@@ -41,7 +41,7 @@
                 "
                 class="text-danger"
               >
-                Password is not correct
+                Password is not correct.
               </p>
             </div>
           </div>
