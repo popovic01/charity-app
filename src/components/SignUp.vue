@@ -73,11 +73,17 @@
 
 <script setup>
 import { ref } from 'vue'
-import { users } from '../assets/data/users.js'
 
 const emit = defineEmits(['register'])
 
 const isFormSubmitted = ref(false)
+
+const retrieveUsers = () => {
+  let users = localStorage.getItem('users')
+  return users ? JSON.parse(users) : []
+}
+
+const users = ref(retrieveUsers())
 
 const getInitialData = () => ({
   name: '',
@@ -110,9 +116,10 @@ const submitForm = () => {
     !formValidation.value.isUserRegistered
   ) {
     emit('register')
-    users.push({
+    users.value.push({
       ...formData.value
     })
+    localStorage.setItem('users', JSON.stringify(users.value))
     localStorage.setItem('currentUser', JSON.stringify(formData.value))
     clearForm()
   }
@@ -162,7 +169,7 @@ function checkValidation() {
     formValidation.value.isPasswordValid = false
   }
 
-  if (users.some((user) => user.email === formData.value.email)) {
+  if (users.value.some((user) => user.email === formData.value.email)) {
     formValidation.value.isUserRegistered = true
   } else {
     formValidation.value.isUserRegistered = false

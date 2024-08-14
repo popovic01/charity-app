@@ -1,8 +1,17 @@
 <script setup>
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
+import { users } from '../src/assets/data/users.js'
 
 const isLoggedIn = ref(false)
+
+function saveUsers() {
+  if (!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify(users))
+  }
+}
+
+saveUsers()
 
 function changeIsLoggedIn() {
   isLoggedIn.value = !isLoggedIn.value

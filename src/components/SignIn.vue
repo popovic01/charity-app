@@ -63,11 +63,17 @@
 
 <script setup>
 import { ref } from 'vue'
-import { users } from '../assets/data/users.js'
 
 const emit = defineEmits(['login'])
 
 const isFormSubmitted = ref(false)
+
+const retrieveUsers = () => {
+  let users = localStorage.getItem('users')
+  return users ? JSON.parse(users) : []
+}
+
+const users = ref(retrieveUsers())
 
 const getInitialData = () => ({
   email: '',
@@ -102,7 +108,7 @@ const submitForm = () => {
 }
 
 function checkValidation() {
-  let user = users.find((user) => user.email === formData.value.email)
+  let user = users.value.find((user) => user.email === formData.value.email)
 
   if (user) {
     formValidation.value.isUserRegistered = true
