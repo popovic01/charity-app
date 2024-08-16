@@ -21,9 +21,25 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Awareness for Non-Indigenous People</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Donation Platform</a>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="donation"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Donation Platform
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="donate-now">Donate Now</a></li>
+            <li><a class="dropdown-item" href="impact-reports">Impact reports</a></li>
+            <li><a class="dropdown-item" href="fundraising-campaigns">Fundraising campaigns</a></li>
+          </ul>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">About Us</a>
         </li>
