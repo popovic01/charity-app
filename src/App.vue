@@ -2,6 +2,19 @@
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import { users } from '../src/assets/data/users.js'
+import { useToast } from 'primevue/usetoast'
+import Toast from 'primevue/toast'
+
+const toast = useToast()
+
+const showSuccess = (title, description) => {
+  toast.add({
+    severity: 'success',
+    summary: title,
+    detail: description,
+    life: 3000
+  })
+}
 
 const isLoggedIn = ref(false)
 
@@ -22,9 +35,17 @@ function changeIsLoggedIn() {
 </script>
 
 <template>
+  <Toast />
   <p><strong>Current route path:</strong> {{ $route.fullPath }}</p>
 
   <main>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="showSuccess('Success', 'You now know how to get a toast working!')"
+    >
+      Show Toast
+    </button>
     <NavBar :isLoggedIn="isLoggedIn" @logout="changeIsLoggedIn"></NavBar>
     <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" />
   </main>
