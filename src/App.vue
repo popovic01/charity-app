@@ -16,7 +16,7 @@ const showSuccess = (title, description) => {
   })
 }
 
-const isLoggedIn = ref(false)
+const isLoggedIn = ref(localStorage.getItem('currentUser') === null ? false : true)
 
 function saveUsers() {
   if (!localStorage.getItem('users')) {
