@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="">
       <img src="../assets/images/logo.png" width="90" height="90" alt="logo" />
     </a>
 

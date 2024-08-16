@@ -106,9 +106,15 @@ const submitForm = () => {
   ) {
     router.push('/')
     emit('login')
-    localStorage.setItem('currentUser', JSON.stringify(formData.value))
+    let user = getUser(formData.value.email)
+    //create token for the user!
+    localStorage.setItem('currentUser', JSON.stringify(user))
     clearForm()
   }
+}
+
+function getUser(email) {
+  return users.value.find((x) => x.email == email)
 }
 
 function checkValidation() {

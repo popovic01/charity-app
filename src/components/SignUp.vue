@@ -123,6 +123,7 @@ const submitForm = () => {
     users.value.push({
       ...formData.value
     })
+    //create token for the user!
     localStorage.setItem('users', JSON.stringify(users.value))
     localStorage.setItem('currentUser', JSON.stringify(formData.value))
     clearForm()
