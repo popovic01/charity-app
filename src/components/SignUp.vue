@@ -73,6 +73,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const emit = defineEmits(['register'])
 
@@ -115,6 +118,7 @@ const submitForm = () => {
     formValidation.value.isNameValid &&
     !formValidation.value.isUserRegistered
   ) {
+    router.push('/')
     emit('register')
     users.value.push({
       ...formData.value

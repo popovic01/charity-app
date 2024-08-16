@@ -63,6 +63,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const emit = defineEmits(['login'])
 
@@ -101,6 +104,7 @@ const submitForm = () => {
     formValidation.value.isUserRegistered &&
     formValidation.value.isPasswordCorrect
   ) {
+    router.push('/')
     emit('login')
     localStorage.setItem('currentUser', JSON.stringify(formData.value))
     clearForm()
