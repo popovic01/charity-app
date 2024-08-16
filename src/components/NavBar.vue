@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="">
-      <img src="../assets/images/logo.png" width="90" height="90" alt="logo" />
+      <img src="../assets/images/logo.png" width="50" height="40" alt="logo" />
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -27,6 +27,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#">About Us</a>
         </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item" v-if="!isLoggedIn">
           <a class="nav-link" href="/sign-in">Sign in</a>
         </li>
