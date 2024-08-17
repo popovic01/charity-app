@@ -36,16 +36,16 @@ function changeIsLoggedIn() {
 
 <template>
   <Toast />
-  <p><strong>Current route path:</strong> {{ $route.fullPath }}</p>
+  <!-- <p><strong>Current route path:</strong> {{ $route.fullPath }}</p> -->
 
   <main>
-    <button
+    <!-- <button
       type="button"
       class="btn btn-primary"
       @click="showSuccess('Success', 'You now know how to get a toast working!')"
     >
       Show Toast
-    </button>
+    </button> -->
     <NavBar :isLoggedIn="isLoggedIn" @logout="changeIsLoggedIn"></NavBar>
     <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" />
   </main>
