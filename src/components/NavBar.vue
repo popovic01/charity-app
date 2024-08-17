@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" href="/">
       <img src="../assets/images/logo.png" width="50" height="40" alt="logo" />
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="">Home</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Health Resources</a>
@@ -34,9 +34,14 @@
             Donation Platform
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="donate-now">Donate Now</a></li>
-            <li><a class="dropdown-item" href="impact-reports">Impact reports</a></li>
-            <li><a class="dropdown-item" href="fundraising-campaigns">Fundraising campaigns</a></li>
+            <li><a class="dropdown-item" href="/donation">Overview</a></li>
+            <li><a class="dropdown-item" href="/donation/donate-now">Donate Now</a></li>
+            <li><a class="dropdown-item" href="/donation/impact-reports">Impact reports</a></li>
+            <li>
+              <a class="dropdown-item" href="/donation/fundraising-campaigns"
+                >Fundraising campaigns</a
+              >
+            </li>
           </ul>
         </li>
 
