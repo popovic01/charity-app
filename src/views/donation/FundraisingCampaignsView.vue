@@ -33,8 +33,8 @@
 import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Rating from 'primevue/rating'
-import { donationCampaigns } from '../../../src/assets/data/donationCampaigns'
-import CoverImage from '../CoverImage.vue'
+import { donationCampaigns } from '../../assets/data/donationCampaigns'
+import CoverImage from '../../components/CoverImage.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

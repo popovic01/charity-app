@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import CoverImage from '../CoverImage.vue'
+import CoverImage from '../../components/CoverImage.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './components/Home.vue'
-import SignUp from './components/SignUp.vue'
-import SignIn from './components/SignIn.vue'
-import Donation from './components/donation/Donation.vue'
-import Reports from './components/donation/Reports.vue'
-import FundraisingCampaigns from './components/donation/FundraisingCampaigns.vue'
-import FundraisingCampaignDetails from './components/donation/FundraisingCampaignDetails.vue'
+import Home from './views/HomeView.vue'
+import SignUp from './views/SignUpView.vue'
+import SignIn from './views/SignInView.vue'
+import Donation from './views/donation/Donation.vue'
+import Reports from './views/donation/Reports.vue'
+import FundraisingCampaigns from './views/donation/FundraisingCampaignsView.vue'
+import FundraisingCampaignDetails from './views/donation/FundraisingCampaignDetailsView.vue'
 
 const routes = [
   {
