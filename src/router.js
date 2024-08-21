@@ -26,15 +26,12 @@ import CaseStudiesView from './views/non-indigenous-awareness/CaseStudiesView.vu
 import CulturalPreservationView from './views/non-indigenous-awareness/CulturalPreservationView.vue'
 import HealthDisparitiesView from './views/non-indigenous-awareness/HealthDisparitiesView.vue'
 import SocioEconomicIssuesView from './views/non-indigenous-awareness/SocioEconomicIssuesView.vue'
+import DonateNowView from './views/donation/DonateNowView.vue'
 
 const routes = [
   {
     path: '/',
     component: HomeView
-    // add this if you want to allow access only to auth users
-    // meta: {
-    //   requiresAuth: true
-    // }
   },
   { path: '/sign-in', component: SignInView },
   { path: '/sign-up', component: SignUpView },
@@ -42,6 +39,14 @@ const routes = [
     path: '/donation',
     component: DonationView,
     children: [
+      {
+        path: 'donate-now',
+        component: DonateNowView,
+        // add this if you want to allow access only to auth users
+        meta: {
+          requiresAuth: true
+        }
+      },
       { path: 'impact-reports', component: ReportsView },
       { path: 'fundraising-campaigns', component: FundraisingCampaignsView },
       { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetailsView }
