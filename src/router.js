@@ -5,6 +5,7 @@ import SignIn from './components/SignIn.vue'
 import Donation from './components/donation/Donation.vue'
 import Reports from './components/donation/Reports.vue'
 import FundraisingCampaigns from './components/donation/FundraisingCampaigns.vue'
+import FundraisingCampaignDetails from './components/donation/FundraisingCampaignDetails.vue'
 
 const routes = [
   {
@@ -22,7 +23,8 @@ const routes = [
     component: Donation,
     children: [
       { path: 'impact-reports', component: Reports },
-      { path: 'fundraising-campaigns', component: FundraisingCampaigns }
+      { path: 'fundraising-campaigns', component: FundraisingCampaigns },
+      { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetails }
     ]
   }
 ]
