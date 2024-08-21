@@ -17,6 +17,10 @@ import EducationalMaterialsView from './views/educational-materials/EducationalM
 import MentalHealthView from './views/educational-materials/MentalHealthView.vue'
 import NutritionView from './views/educational-materials/NutritionView.vue'
 import PreventiveCareView from './views/educational-materials/PreventiveCareView.vue'
+import HealthResourcesView from './views/health-resources/HealthResourcesView.vue'
+import TraditionalPracticesView from './views/health-resources/TraditionalPracticesView.vue'
+import SymptomCheckerView from './views/health-resources/SymptomCheckerView.vue'
+import HealthcareProvidersView from './views/health-resources/HealthcareProvidersView.vue'
 
 const routes = [
   {
@@ -62,6 +66,15 @@ const routes = [
       { path: 'mental-health', component: MentalHealthView },
       { path: 'nutrition', component: NutritionView },
       { path: 'preventive-care', component: PreventiveCareView }
+    ]
+  },
+  {
+    path: '/health-resources',
+    component: HealthResourcesView,
+    children: [
+      { path: 'healthcare-providers', component: HealthcareProvidersView },
+      { path: 'symptom-checker', component: SymptomCheckerView },
+      { path: 'traditional-practices', component: TraditionalPracticesView }
     ]
   }
 ]

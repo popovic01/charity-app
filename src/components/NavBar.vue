@@ -9,8 +9,34 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Health Resources</a>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="health-resources"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Health Resources
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/health-resources">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/health-resources/healthcare-providers"
+                >Healthcare Providers</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/health-resources/symptom-checker">Symptom Checker</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/health-resources/traditional-practices"
+                >Traditional Practices</a
+              >
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item dropdown">
