@@ -12,7 +12,14 @@ function saveUsers() {
   }
 }
 
+function saveCampaigns() {
+  if (!localStorage.getItem('donationCampaigns')) {
+    localStorage.setItem('donationCampaigns', JSON.stringify(donationCampaigns))
+  }
+}
+
 saveUsers()
+saveCampaigns()
 
 function changeIsLoggedIn() {
   isLoggedIn.value = !isLoggedIn.value
@@ -27,7 +34,7 @@ function changeIsLoggedIn() {
 
   <main>
     <NavBar :isLoggedIn="isLoggedIn" @logout="changeIsLoggedIn"></NavBar>
-    <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" />
+    <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" :isLoggedIn="isLoggedIn" />
   </main>
 </template>
 
