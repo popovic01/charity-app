@@ -1,30 +1,43 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './views/HomeView.vue'
-import SignUp from './views/SignUpView.vue'
-import SignIn from './views/SignInView.vue'
-import Donation from './views/donation/DonationView.vue'
-import Reports from './views/donation/ReportsView.vue'
-import FundraisingCampaigns from './views/donation/FundraisingCampaignsView.vue'
-import FundraisingCampaignDetails from './views/donation/FundraisingCampaignDetailsView.vue'
+import HomeView from './views/HomeView.vue'
+import SignUpView from './views/SignUpView.vue'
+import SignInView from './views/SignInView.vue'
+import DonationView from './views/donation/DonationView.vue'
+import ReportsView from './views/donation/ReportsView.vue'
+import FundraisingCampaignsView from './views/donation/FundraisingCampaignsView.vue'
+import FundraisingCampaignDetailsView from './views/donation/FundraisingCampaignDetailsView.vue'
+import AboutUsView from './views/about-us/AboutUsView.vue'
+import OurTeamView from './views/about-us/OurTeamView.vue'
+import ContactUsView from './views/about-us/ContactUsView.vue'
+import FAQsView from './views/about-us/FAQsView.vue'
 
 const routes = [
   {
     path: '/',
-    component: Home
+    component: HomeView
     // add this if you want to allow access only to auth users
     // meta: {
     //   requiresAuth: true
     // }
   },
-  { path: '/sign-in', component: SignIn },
-  { path: '/sign-up', component: SignUp },
+  { path: '/sign-in', component: SignInView },
+  { path: '/sign-up', component: SignUpView },
   {
     path: '/donation',
-    component: Donation,
+    component: DonationView,
     children: [
-      { path: 'impact-reports', component: Reports },
-      { path: 'fundraising-campaigns', component: FundraisingCampaigns },
-      { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetails }
+      { path: 'impact-reports', component: ReportsView },
+      { path: 'fundraising-campaigns', component: FundraisingCampaignsView },
+      { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetailsView }
+    ]
+  },
+  {
+    path: '/about-us',
+    component: AboutUsView,
+    children: [
+      { path: 'our-team', component: OurTeamView },
+      { path: 'contact-us', component: ContactUsView },
+      { path: 'faqs', component: FAQsView }
     ]
   }
 ]

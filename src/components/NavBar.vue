@@ -45,8 +45,25 @@
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="about-us"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            About Us
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/about-us">Overview</a></li>
+            <li><a class="dropdown-item" href="/about-us/our-team">Our team</a></li>
+            <li><a class="dropdown-item" href="/about-us/contact-us">Contact us</a></li>
+            <li>
+              <a class="dropdown-item" href="/about-us/faqs">FAQs</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -71,4 +88,8 @@
 defineProps(['isLoggedIn'])
 </script>
 
-<style></style>
+<style scoped>
+.nav-item {
+  font-size: 0.9rem;
+}
+</style>
