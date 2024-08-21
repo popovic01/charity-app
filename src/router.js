@@ -10,6 +10,9 @@ import AboutUsView from './views/about-us/AboutUsView.vue'
 import OurTeamView from './views/about-us/OurTeamView.vue'
 import ContactUsView from './views/about-us/ContactUsView.vue'
 import FAQsView from './views/about-us/FAQsView.vue'
+import CommunitySupportView from './views/community-support/CommunitySupportView.vue'
+import SupportGroupsView from './views/community-support/SupportGroupsView.vue'
+import CommunityEventsView from './views/community-support/CommunityEventsView.vue'
 
 const routes = [
   {
@@ -38,6 +41,14 @@ const routes = [
       { path: 'our-team', component: OurTeamView },
       { path: 'contact-us', component: ContactUsView },
       { path: 'faqs', component: FAQsView }
+    ]
+  },
+  {
+    path: '/community-support',
+    component: CommunitySupportView,
+    children: [
+      { path: 'community-events', component: CommunityEventsView },
+      { path: 'support-groups', component: SupportGroupsView }
     ]
   }
 ]

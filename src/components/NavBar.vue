@@ -15,9 +15,31 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Educational Materials</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Community Support</a>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="community-support"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Community Support
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/community-support">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/community-support/support-groups">Support Groups</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/community-support/community-events"
+                >Community Events</a
+              >
+            </li>
+          </ul>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">Awareness for Non-Indigenous People</a>
         </li>
