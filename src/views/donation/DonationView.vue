@@ -9,8 +9,6 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-defineProps(['title'])
-
 function isOverview() {
   if (router.currentRoute.value.fullPath === '/donation') {
     return true
