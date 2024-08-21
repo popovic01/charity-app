@@ -11,14 +11,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="health-resources"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             Health Resources
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -40,14 +33,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="educational-materials"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             Educational Materials
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,14 +53,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="community-support"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             Community Support
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -91,14 +70,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="non-indigenous-awareness"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             Non-Indigenous Awareness
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -127,14 +99,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="donation"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             Donation Platform
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -150,14 +115,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="about-us"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" aria-expanded="false">
             About Us
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -193,6 +151,14 @@ defineProps(['isLoggedIn'])
 </script>
 
 <style scoped>
+.dropdown:hover {
+  cursor: pointer;
+
+  .dropdown-menu {
+    display: block;
+  }
+}
+
 .nav-item {
   font-size: 0.9rem;
 }
