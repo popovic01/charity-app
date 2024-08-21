@@ -13,6 +13,10 @@ import FAQsView from './views/about-us/FAQsView.vue'
 import CommunitySupportView from './views/community-support/CommunitySupportView.vue'
 import SupportGroupsView from './views/community-support/SupportGroupsView.vue'
 import CommunityEventsView from './views/community-support/CommunityEventsView.vue'
+import EducationalMaterialsView from './views/educational-materials/EducationalMaterialsView.vue'
+import MentalHealthView from './views/educational-materials/MentalHealthView.vue'
+import NutritionView from './views/educational-materials/NutritionView.vue'
+import PreventiveCareView from './views/educational-materials/PreventiveCareView.vue'
 
 const routes = [
   {
@@ -49,6 +53,15 @@ const routes = [
     children: [
       { path: 'community-events', component: CommunityEventsView },
       { path: 'support-groups', component: SupportGroupsView }
+    ]
+  },
+  {
+    path: '/educational-materials',
+    component: EducationalMaterialsView,
+    children: [
+      { path: 'mental-health', component: MentalHealthView },
+      { path: 'nutrition', component: NutritionView },
+      { path: 'preventive-care', component: PreventiveCareView }
     ]
   }
 ]

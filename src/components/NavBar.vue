@@ -12,8 +12,32 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Health Resources</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Educational Materials</a>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="educational-materials"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Educational Materials
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/educational-materials">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/educational-materials/mental-health">Mental Health</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/educational-materials/nutrition">Nutrition</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/educational-materials/preventive-care"
+                >Preventive Care</a
+              >
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item dropdown">
