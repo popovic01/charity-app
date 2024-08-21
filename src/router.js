@@ -21,6 +21,11 @@ import HealthResourcesView from './views/health-resources/HealthResourcesView.vu
 import TraditionalPracticesView from './views/health-resources/TraditionalPracticesView.vue'
 import SymptomCheckerView from './views/health-resources/SymptomCheckerView.vue'
 import HealthcareProvidersView from './views/health-resources/HealthcareProvidersView.vue'
+import NonIndigenousAwarenessView from './views/non-indigenous-awareness/NonIndigenousAwarenessView.vue'
+import CaseStudiesView from './views/non-indigenous-awareness/CaseStudiesView.vue'
+import CulturalPreservationView from './views/non-indigenous-awareness/CulturalPreservationView.vue'
+import HealthDisparitiesView from './views/non-indigenous-awareness/HealthDisparitiesView.vue'
+import SocioEconomicIssuesView from './views/non-indigenous-awareness/SocioEconomicIssuesView.vue'
 
 const routes = [
   {
@@ -75,6 +80,16 @@ const routes = [
       { path: 'healthcare-providers', component: HealthcareProvidersView },
       { path: 'symptom-checker', component: SymptomCheckerView },
       { path: 'traditional-practices', component: TraditionalPracticesView }
+    ]
+  },
+  {
+    path: '/non-indigenous-awareness',
+    component: NonIndigenousAwarenessView,
+    children: [
+      { path: 'case-studies', component: CaseStudiesView },
+      { path: 'cultural-preservation', component: CulturalPreservationView },
+      { path: 'health-disparities', component: HealthDisparitiesView },
+      { path: 'socio-economic-issues', component: SocioEconomicIssuesView }
     ]
   }
 ]

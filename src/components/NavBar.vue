@@ -90,8 +90,40 @@
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Awareness for Non-Indigenous People</a>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="non-indigenous-awareness"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Non-Indigenous Awareness
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/non-indigenous-awareness">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/non-indigenous-awareness/case-studies"
+                >Case studies</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/non-indigenous-awareness/cultural-preservation"
+                >Cultural Preservation</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/non-indigenous-awareness/health-disparities"
+                >Health Disparities</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/non-indigenous-awareness/socio-economic-issues"
+                >Socio-economic Issues</a
+              >
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item dropdown">
