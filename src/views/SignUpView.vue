@@ -8,14 +8,26 @@
           <div class="row mb-3">
             <div class="col-md-7 mb-2">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" v-model="formData.name" />
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                v-model="formData.name"
+                @input="() => validateName()"
+              />
               <p v-if="!formValidation.isNameValid && isFormSubmitted" class="text-danger">
                 Name is required.
               </p>
             </div>
             <div class="col-md-7 mb-2">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" v-model="formData.email" />
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                v-model="formData.email"
+                @input="() => validateEmail()"
+              />
             </div>
             <p v-if="!formValidation.isEmailEntered && isFormSubmitted" class="text-danger">
               Email is required.
@@ -38,6 +50,7 @@
                 class="form-control"
                 id="password"
                 v-model="formData.password"
+                @input="() => validatePassword()"
               />
               <p v-if="!formValidation.isPasswordEntered && isFormSubmitted" class="text-danger">
                 Password is required.
@@ -61,6 +74,7 @@
                 class="form-control"
                 id="confirm-password"
                 v-model="formData.confirmPassword"
+                @input="() => validateConfirmPassword()"
               />
               <p
                 v-if="!formValidation.isConfirmPasswordEntered && isFormSubmitted"
@@ -136,7 +150,6 @@ const formData = ref(getInitialData())
 const formValidation = ref(getInitialValidation())
 
 const submitForm = () => {
-  checkValidation()
   isFormSubmitted.value = true
 
   //the validation is correct
@@ -162,14 +175,10 @@ const submitForm = () => {
   }
 }
 
-function checkValidation() {
+function validateEmail() {
   let emailRegex = new RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   )
-  let lengthRegex = new RegExp(/^\S{8,22}$/m)
-  let specialCharRegex = new RegExp(/^(?=.*[~!@#$%^*\-_=+[{\]}\/;:,.?]).*$/m)
-  let upperCharRegex = new RegExp(/^(?=.*[A-Z]).*$/m)
-  let numericCharRegex = new RegExp(/^(?=.*\d).*$/m)
 
   if (formData.value.email) {
     formValidation.value.isEmailEntered = true
@@ -179,26 +188,34 @@ function checkValidation() {
 
   if (emailRegex.test(formData.value.email)) {
     formValidation.value.isEmailValid = true
+    if (users.value.some((user) => user.email === formData.value.email)) {
+      formValidation.value.isUserRegistered = true
+    } else {
+      formValidation.value.isUserRegistered = false
+    }
   } else {
     formValidation.value.isEmailValid = false
   }
+}
 
+function validateName() {
   if (formData.value.name) {
     formValidation.value.isNameValid = true
   } else {
     formValidation.value.isNameValid = false
   }
+}
+
+function validatePassword() {
+  let lengthRegex = new RegExp(/^\S{8,22}$/m)
+  let specialCharRegex = new RegExp(/^(?=.*[~!@#$%^*\-_=+[{\]}\/;:,.?]).*$/m)
+  let upperCharRegex = new RegExp(/^(?=.*[A-Z]).*$/m)
+  let numericCharRegex = new RegExp(/^(?=.*\d).*$/m)
 
   if (formData.value.password) {
     formValidation.value.isPasswordEntered = true
   } else {
     formValidation.value.isPasswordEntered = false
-  }
-
-  if (formData.value.confirmPassword) {
-    formValidation.value.isConfirmPasswordEntered = true
-  } else {
-    formValidation.value.isConfirmPasswordEntered = false
   }
 
   if (
@@ -211,17 +228,19 @@ function checkValidation() {
   } else {
     formValidation.value.isPasswordValid = false
   }
+}
+
+function validateConfirmPassword() {
+  if (formData.value.confirmPassword) {
+    formValidation.value.isConfirmPasswordEntered = true
+  } else {
+    formValidation.value.isConfirmPasswordEntered = false
+  }
 
   if (formData.value.confirmPassword != formData.value.password) {
     formValidation.value.ifPasswordsMatch = false
   } else {
     formValidation.value.ifPasswordsMatch = true
-  }
-
-  if (users.value.some((user) => user.email === formData.value.email)) {
-    formValidation.value.isUserRegistered = true
-  } else {
-    formValidation.value.isUserRegistered = false
   }
 }
 

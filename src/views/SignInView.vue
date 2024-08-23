@@ -8,7 +8,13 @@
           <div class="row mb-3">
             <div class="col-md-7 mb-2">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" v-model="formData.email" />
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                v-model="formData.email"
+                @input="validateEmail()"
+              />
             </div>
             <p v-if="!formValidation.isEmailValid && isFormSubmitted" class="text-danger">
               Email is not valid.
@@ -28,14 +34,15 @@
                 class="form-control"
                 id="password"
                 v-model="formData.password"
+                @input="validatePassword()"
               />
-              <p v-if="!formValidation.isPasswordValid && isFormSubmitted" class="text-danger">
+              <p v-if="!formValidation.isPasswordEntered && isFormSubmitted" class="text-danger">
                 Password is required.
               </p>
               <p
                 v-if="
                   !formValidation.isPasswordCorrect &&
-                  formValidation.isPasswordValid &&
+                  formValidation.isPasswordEntered &&
                   formValidation.isUserRegistered &&
                   isFormSubmitted
                 "
@@ -77,6 +84,7 @@ const retrieveUsers = () => {
 }
 
 const users = ref(retrieveUsers())
+const user = ref(null)
 
 const getInitialData = () => ({
   email: '',
@@ -85,7 +93,7 @@ const getInitialData = () => ({
 
 const getInitialValidation = () => ({
   isEmailValid: false,
-  isPasswordValid: false,
+  isPasswordEntered: false,
   isPasswordCorrect: false,
   isUserRegistered: false
 })
@@ -94,13 +102,12 @@ const formData = ref(getInitialData())
 const formValidation = ref(getInitialValidation())
 
 const submitForm = () => {
-  checkValidation()
   isFormSubmitted.value = true
 
   //the validation is correct
   if (
     formValidation.value.isEmailValid &&
-    formValidation.value.isPasswordValid &&
+    formValidation.value.isPasswordEntered &&
     formValidation.value.isUserRegistered &&
     formValidation.value.isPasswordCorrect
   ) {
@@ -113,32 +120,36 @@ const submitForm = () => {
   }
 }
 
-function getUser(email) {
-  return users.value.find((x) => x.email == email)
-}
-
-function checkValidation() {
-  let user = users.value.find((user) => user.email === formData.value.email)
-
-  if (user) {
-    formValidation.value.isUserRegistered = true
-  }
-
-  if (user?.password === formData.value.password) {
-    formValidation.value.isPasswordCorrect = true
-  }
+function validateEmail() {
+  user.value = users.value.find((user) => user.email === formData.value.email)
 
   if (formData.value.email) {
     formValidation.value.isEmailValid = true
+    if (user.value) {
+      formValidation.value.isUserRegistered = true
+    } else {
+      formValidation.value.isUserRegistered = false
+    }
+  } else {
+    formValidation.value.isEmailValid = false
   }
+}
 
-  if (formData.value.name) {
-    formValidation.value.isNameValid = true
-  }
-
+function validatePassword() {
   if (formData.value.password) {
-    formValidation.value.isPasswordValid = true
+    formValidation.value.isPasswordEntered = true
+    if (user?.value.password === formData.value.password) {
+      formValidation.value.isPasswordCorrect = true
+    } else {
+      formValidation.value.isPasswordCorrect = false
+    }
+  } else {
+    formValidation.value.isPasswordEntered = false
   }
+}
+
+function getUser(email) {
+  return users.value.find((x) => x.email == email)
 }
 
 function clearForm() {
