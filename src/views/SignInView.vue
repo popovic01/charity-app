@@ -111,11 +111,10 @@ const submitForm = () => {
     formValidation.value.isUserRegistered &&
     formValidation.value.isPasswordCorrect
   ) {
+    //create token for the user!
+    localStorage.setItem('currentUser', JSON.stringify(user.value))
     router.push('/')
     emit('login')
-    let user = getUser(formData.value.email)
-    //create token for the user!
-    localStorage.setItem('currentUser', JSON.stringify(user))
     clearForm()
   }
 }
@@ -146,10 +145,6 @@ function validatePassword() {
   } else {
     formValidation.value.isPasswordEntered = false
   }
-}
-
-function getUser(email) {
-  return users.value.find((x) => x.email == email)
 }
 
 function clearForm() {
