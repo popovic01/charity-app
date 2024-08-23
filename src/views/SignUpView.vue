@@ -54,6 +54,33 @@
                 digit, and one special character.
               </p>
             </div>
+            <div class="col-md-7 mb-2">
+              <label for="confirm-password" class="form-label">Confirm password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirm-password"
+                v-model="formData.confirmPassword"
+              />
+              <p
+                v-if="!formValidation.isConfirmPasswordEntered && isFormSubmitted"
+                class="text-danger"
+              >
+                Confirm password is required.
+              </p>
+              <p
+                v-if="
+                  formValidation.isPasswordEntered &&
+                  formValidation.isPasswordValid &&
+                  formValidation.isConfirmPasswordEntered &&
+                  !formValidation.ifPasswordsMatch &&
+                  isFormSubmitted
+                "
+                class="text-danger"
+              >
+                Passwords do not match.
+              </p>
+            </div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Sign up</button>
@@ -99,7 +126,10 @@ const getInitialValidation = () => ({
   isEmailValid: false,
   isNameValid: false,
   isPasswordValid: false,
-  isUserRegistered: false
+  isPasswordEntered: false,
+  isConfirmPasswordEntered: false,
+  isUserRegistered: false,
+  ifPasswordsMatch: false
 })
 
 const formData = ref(getInitialData())
@@ -115,6 +145,8 @@ const submitForm = () => {
     formValidation.value.isEmailEntered &&
     formValidation.value.isPasswordValid &&
     formValidation.value.isPasswordEntered &&
+    formValidation.value.isConfirmPasswordEntered &&
+    formValidation.value.ifPasswordsMatch &&
     formValidation.value.isNameValid &&
     !formValidation.value.isUserRegistered
   ) {
@@ -163,6 +195,12 @@ function checkValidation() {
     formValidation.value.isPasswordEntered = false
   }
 
+  if (formData.value.confirmPassword) {
+    formValidation.value.isConfirmPasswordEntered = true
+  } else {
+    formValidation.value.isConfirmPasswordEntered = false
+  }
+
   if (
     lengthRegex.test(formData.value.password) &&
     specialCharRegex.test(formData.value.password) &&
@@ -172,6 +210,12 @@ function checkValidation() {
     formValidation.value.isPasswordValid = true
   } else {
     formValidation.value.isPasswordValid = false
+  }
+
+  if (formData.value.confirmPassword != formData.value.password) {
+    formValidation.value.ifPasswordsMatch = false
+  } else {
+    formValidation.value.ifPasswordsMatch = true
   }
 
   if (users.value.some((user) => user.email === formData.value.email)) {
