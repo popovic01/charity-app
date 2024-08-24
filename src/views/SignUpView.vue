@@ -115,6 +115,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { encrypteData } from '../utils/passwordHash'
 
 const router = useRouter()
 
@@ -165,12 +166,15 @@ const submitForm = () => {
   ) {
     router.push('/')
     emit('register')
+    formData.value.password = encrypteData(formData.value.password)
     users.value.push({
       ...formData.value
     })
-    //create token for the user!
     localStorage.setItem('users', JSON.stringify(users.value))
-    localStorage.setItem('currentUser', JSON.stringify(formData.value))
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ email: formData.value.email, isAdmin: formData.value.isAdmin })
+    )
     clearForm()
   }
 }

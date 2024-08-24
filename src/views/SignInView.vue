@@ -71,6 +71,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { encrypteData } from '../utils/passwordHash'
 
 const router = useRouter()
 
@@ -103,6 +104,8 @@ const formValidation = ref(getInitialValidation())
 
 const submitForm = () => {
   isFormSubmitted.value = true
+  validateEmail()
+  validatePassword()
 
   //the validation is correct
   if (
@@ -111,8 +114,10 @@ const submitForm = () => {
     formValidation.value.isUserRegistered &&
     formValidation.value.isPasswordCorrect
   ) {
-    //create token for the user!
-    localStorage.setItem('currentUser', JSON.stringify(user.value))
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ email: formData.value.email, isAdmin: formData.value.isAdmin })
+    )
     router.push('/')
     emit('login')
     clearForm()
@@ -137,7 +142,7 @@ function validateEmail() {
 function validatePassword() {
   if (formData.value.password) {
     formValidation.value.isPasswordEntered = true
-    if (user?.value.password === formData.value.password) {
+    if (user?.value.password === encrypteData(formData.value.password)) {
       formValidation.value.isPasswordCorrect = true
     } else {
       formValidation.value.isPasswordCorrect = false

@@ -3,11 +3,13 @@ import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import { users } from '../src/assets/data/users.js'
 import { donationCampaigns } from '../src/assets/data/donationCampaigns'
+import { encrypteData } from './utils/passwordHash'
 
 const isLoggedIn = ref(localStorage.getItem('currentUser') === null ? false : true)
 
 function saveUsers() {
   if (!localStorage.getItem('users')) {
+    users.forEach((x) => (x.password = encrypteData(x.password)))
     localStorage.setItem('users', JSON.stringify(users))
   }
 }

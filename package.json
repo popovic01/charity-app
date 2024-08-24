@@ -13,6 +13,7 @@
   "dependencies": {
     "@primevue/themes": "^4.0.4",
     "bootstrap": "^5.3.3",
+    "crypto-js": "^4.2.0",
     "primevue": "^4.0.4",
     "vue-router": "^4.4.3"
   },
