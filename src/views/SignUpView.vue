@@ -165,7 +165,6 @@ const submitForm = () => {
     !formValidation.value.isUserRegistered
   ) {
     router.push('/')
-    emit('register')
     formData.value.password = encrypteData(formData.value.password)
     users.value.push({
       ...formData.value
@@ -175,6 +174,7 @@ const submitForm = () => {
       'currentUser',
       JSON.stringify({ email: formData.value.email, isAdmin: false })
     )
+    emit('register')
     clearForm()
   }
 }
