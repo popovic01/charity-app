@@ -152,6 +152,10 @@ const formValidation = ref(getInitialValidation())
 
 const submitForm = () => {
   isFormSubmitted.value = true
+  validateName()
+  validateEmail()
+  validatePassword()
+  validateConfirmPassword()
 
   //the validation is correct
   if (
