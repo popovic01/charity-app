@@ -85,11 +85,6 @@
       </div>
     </div>
   </div>
-
-  <h2>Users</h2>
-  <ul v-if="campaigns.length">
-    <li v-for="c in campaigns" :key="c">{{ c.name }} ({{ c.description }})</li>
-  </ul>
 </template>
 
 <script setup>

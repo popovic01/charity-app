@@ -59,13 +59,6 @@
       </div>
     </div>
   </div>
-
-  <h2>Users</h2>
-  <ul v-if="users.length">
-    <li v-for="user in users" :key="user.email">
-      {{ user.name }} ({{ user.email }}) - Admin: {{ user.isAdmin }}
-    </li>
-  </ul>
 </template>
 
 <script setup>
