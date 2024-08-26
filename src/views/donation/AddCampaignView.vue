@@ -21,12 +21,13 @@
             </div>
             <div class="col-md-7 mb-2">
               <label for="description" class="form-label">Description</label>
-              <input
-                type="text"
+              <textarea
                 class="form-control"
                 id="description"
                 v-model="formData.description"
                 @input="() => validateDescription()"
+                rows="10"
+                textarea
               />
             </div>
             <p v-if="!formValidation.isDescriptionValid && isFormSubmitted" class="text-danger">

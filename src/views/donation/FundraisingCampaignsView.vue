@@ -62,4 +62,13 @@ function navigateToDetails(id) {
   overflow: hidden;
   margin: 0 1.2rem 1rem;
 }
+
+.p-card-content {
+  height: 6rem;
+  overflow: hidden;
+}
+
+.p-card-title {
+  height: 4rem;
+}
 </style>
