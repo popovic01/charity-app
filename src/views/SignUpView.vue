@@ -173,7 +173,7 @@ const submitForm = () => {
     localStorage.setItem('users', JSON.stringify(users.value))
     localStorage.setItem(
       'currentUser',
-      JSON.stringify({ email: formData.value.email, isAdmin: formData.value.isAdmin })
+      JSON.stringify({ email: formData.value.email, isAdmin: false })
     )
     clearForm()
   }

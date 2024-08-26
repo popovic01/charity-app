@@ -116,7 +116,7 @@ const submitForm = () => {
   ) {
     localStorage.setItem(
       'currentUser',
-      JSON.stringify({ email: formData.value.email, isAdmin: formData.value.isAdmin })
+      JSON.stringify({ email: formData.value.email, isAdmin: user.value.isAdmin })
     )
     router.push('/')
     emit('login')
@@ -142,7 +142,7 @@ function validateEmail() {
 function validatePassword() {
   if (formData.value.password) {
     formValidation.value.isPasswordEntered = true
-    if (user?.value.password === encrypteData(formData.value.password)) {
+    if (user?.value?.password === encrypteData(formData.value.password)) {
       formValidation.value.isPasswordCorrect = true
     } else {
       formValidation.value.isPasswordCorrect = false
