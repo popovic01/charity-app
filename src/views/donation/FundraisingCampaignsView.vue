@@ -2,7 +2,7 @@
   <CoverImage :title="'Fundraising campaigns'"></CoverImage>
 
   <div class="d-flex flex-wrap justify-content-center p-4">
-    <Card v-for="campaign in donationCampaigns" :key="campaign.id">
+    <Card v-for="campaign in campaigns" :key="campaign.id">
       <template #header>
         <img alt="header" src="../../assets/images/logo.png" width="160" />
       </template>
@@ -30,14 +30,21 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Rating from 'primevue/rating'
-import { donationCampaigns } from '../../assets/data/donationCampaigns'
 import CoverImage from '../../components/CoverImage.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+const retrieveCampaigns = () => {
+  let campaigns = localStorage.getItem('donationCampaigns')
+  return campaigns ? JSON.parse(campaigns) : []
+}
+
+const campaigns = ref(retrieveCampaigns())
 
 function navigateToDetails(id) {
   router.push(`fundraising-campaigns/${id}`)

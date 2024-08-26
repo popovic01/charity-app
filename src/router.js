@@ -52,7 +52,12 @@ const routes = [
       },
       { path: 'impact-reports', component: ReportsView },
       { path: 'fundraising-campaigns', component: FundraisingCampaignsView },
-      { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetailsView }
+      { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetailsView },
+      {
+        path: 'add-campaign',
+        component: AddCampaign,
+        meta: { requiresAuth: true, roles: ['admin'] }
+      }
     ]
   },
   {
@@ -122,8 +127,8 @@ router.beforeEach((to, from, next) => {
       ) {
         next('/forbidden')
       } else {
-      // user is authenticated, proceed to the route
-      next()
+        // user is authenticated, proceed to the route
+        next()
       }
     } else {
       // uer is not authenticated, redirect to login

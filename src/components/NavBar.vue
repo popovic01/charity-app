@@ -153,6 +153,9 @@
             <li><a class="dropdown-item" href="/donation">Overview</a></li>
             <li><a class="dropdown-item" href="/donation/donate-now">Donate Now</a></li>
             <li><a class="dropdown-item" href="/donation/impact-reports">Impact reports</a></li>
+            <li v-if="currentUser?.isAdmin">
+              <a class="dropdown-item" href="/donation/add-campaign">Add campaign</a>
+            </li>
             <li>
               <a class="dropdown-item" href="/donation/fundraising-campaigns"
                 >Fundraising campaigns</a
