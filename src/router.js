@@ -27,6 +27,8 @@ import CulturalPreservationView from './views/non-indigenous-awareness/CulturalP
 import HealthDisparitiesView from './views/non-indigenous-awareness/HealthDisparitiesView.vue'
 import SocioEconomicIssuesView from './views/non-indigenous-awareness/SocioEconomicIssuesView.vue'
 import DonateNowView from './views/donation/DonateNowView.vue'
+import AddCampaign from './views/donation/AddCampaignView.vue'
+import FobiddenView from './views/FobiddenView.vue'
 
 const routes = [
   {
@@ -35,6 +37,7 @@ const routes = [
   },
   { path: '/sign-in', component: SignInView },
   { path: '/sign-up', component: SignUpView },
+  { path: '/forbidden', component: FobiddenView },
   {
     path: '/donation',
     component: DonationView,
@@ -107,8 +110,21 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (localStorage.getItem('currentUser')) {
+      if (
+        to.meta.roles.includes('admin') &&
+        JSON.parse(localStorage.getItem('currentUser')).isAdmin
+      ) {
+        // user is authenticated, proceed to the route
+        next()
+      } else if (
+        to.meta.roles.includes('admin') &&
+        !JSON.parse(localStorage.getItem('currentUser')).isAdmin
+      ) {
+        next('/forbidden')
+      } else {
       // user is authenticated, proceed to the route
       next()
+      }
     } else {
       // uer is not authenticated, redirect to login
       next('/sign-in')
