@@ -5,7 +5,11 @@ import { users } from '../src/assets/data/users.js'
 import { donationCampaigns } from '../src/assets/data/donationCampaigns'
 import { encrypteData } from './utils/passwordHash'
 
-const isLoggedIn = ref(localStorage.getItem('currentUser') === null ? false : true)
+const currentUser = ref(
+  localStorage.getItem('currentUser') === null
+    ? null
+    : JSON.parse(localStorage.getItem('currentUser'))
+)
 
 function saveUsers() {
   if (!localStorage.getItem('users')) {
@@ -24,9 +28,11 @@ saveUsers()
 saveCampaigns()
 
 function changeIsLoggedIn() {
-  isLoggedIn.value = !isLoggedIn.value
-  if (!isLoggedIn.value) {
+  if (currentUser.value) {
     localStorage.removeItem('currentUser')
+    currentUser.value = null
+  } else {
+    currentUser.value = JSON.parse(localStorage.getItem('currentUser'))
   }
 }
 </script>
@@ -35,8 +41,8 @@ function changeIsLoggedIn() {
   <Toast />
 
   <main>
-    <NavBar :isLoggedIn="isLoggedIn" @logout="changeIsLoggedIn"></NavBar>
-    <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" :isLoggedIn="isLoggedIn" />
+    <NavBar :currentUser="currentUser" @logout="changeIsLoggedIn"></NavBar>
+    <RouterView @login="changeIsLoggedIn" @register="changeIsLoggedIn" :currentUser="currentUser" />
   </main>
 </template>
 

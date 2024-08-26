@@ -186,10 +186,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" v-if="!isLoggedIn">
+        <li class="nav-item" v-if="!currentUser">
           <a class="nav-link" href="/sign-in">Sign in</a>
         </li>
-        <li class="nav-item" v-if="!isLoggedIn">
+        <li class="nav-item" v-if="!currentUser">
           <a class="nav-link" href="/sign-up">Sign up</a>
         </li>
         <li class="nav-item" v-else>
@@ -201,7 +201,7 @@
 </template>
 
 <script setup>
-defineProps(['isLoggedIn'])
+defineProps(['currentUser'])
 </script>
 
 <style scoped>
