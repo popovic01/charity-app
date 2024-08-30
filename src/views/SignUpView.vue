@@ -7,19 +7,6 @@
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-7 mb-2">
-              <label for="name" class="form-label">Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                v-model="formData.name"
-                @input="() => validateName()"
-              />
-              <p v-if="!formValidation.isNameValid && isFormSubmitted" class="text-danger">
-                Name is required.
-              </p>
-            </div>
-            <div class="col-md-7 mb-2">
               <label for="email" class="form-label">Email</label>
               <input
                 type="text"
@@ -95,6 +82,9 @@
                 Passwords do not match.
               </p>
             </div>
+            <p v-if="formValidation.default && isFormSubmitted" class="text-danger">
+              Something went wrong.
+            </p>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Sign up</button>
@@ -108,23 +98,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { encrypteData } from '../utils/passwordHash'
-
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 const router = useRouter()
 
 const emit = defineEmits(['register'])
 
 const isFormSubmitted = ref(false)
 
-const retrieveUsers = () => {
-  let users = localStorage.getItem('users')
-  return users ? JSON.parse(users) : []
-}
-
-const users = ref(retrieveUsers())
-
 const getInitialData = () => ({
-  name: '',
   email: '',
   password: '',
   isAdmin: false
@@ -132,12 +113,12 @@ const getInitialData = () => ({
 
 const getInitialValidation = () => ({
   isEmailValid: false,
-  isNameValid: false,
   isPasswordValid: false,
   isPasswordEntered: false,
   isConfirmPasswordEntered: false,
   isUserRegistered: false,
-  ifPasswordsMatch: false
+  ifPasswordsMatch: false,
+  default: false
 })
 
 const formData = ref(getInitialData())
@@ -145,7 +126,6 @@ const formValidation = ref(getInitialValidation())
 
 const submitForm = () => {
   isFormSubmitted.value = true
-  validateName()
   validateEmail()
   validatePassword()
   validateConfirmPassword()
@@ -157,26 +137,40 @@ const submitForm = () => {
     formValidation.value.isPasswordValid &&
     formValidation.value.isPasswordEntered &&
     formValidation.value.isConfirmPasswordEntered &&
-    formValidation.value.ifPasswordsMatch &&
-    formValidation.value.isNameValid &&
-    !formValidation.value.isUserRegistered
+    formValidation.value.ifPasswordsMatch
   ) {
-    router.push('/')
-    formData.value.password = encrypteData(formData.value.password)
-    users.value.push({
-      ...formData.value
-    })
-    localStorage.setItem('users', JSON.stringify(users.value))
-    localStorage.setItem(
-      'currentUser',
-      JSON.stringify({ email: formData.value.email, isAdmin: false })
-    )
-    emit('register')
-    clearForm()
+    register()
   }
 }
 
+function register() {
+  const auth = getAuth()
+  createUserWithEmailAndPassword(auth, formData.value.email, formData.value.password)
+    .then(() => {
+      router.push('/')
+      formValidation.value.isUserRegistered = false
+      formValidation.value.default = false
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ email: formData.value.email, isAdmin: false })
+      )
+      emit('register')
+      clearForm()
+    })
+    .catch((error) => {
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          formValidation.value.isUserRegistered = true
+          break
+        default:
+          formValidation.value.default = true
+          break
+      }
+    })
+}
+
 function validateEmail() {
+  formValidation.value.isUserRegistered = false
   let emailRegex = new RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   )
@@ -189,21 +183,8 @@ function validateEmail() {
 
   if (emailRegex.test(formData.value.email)) {
     formValidation.value.isEmailValid = true
-    if (users.value.some((user) => user.email === formData.value.email)) {
-      formValidation.value.isUserRegistered = true
-    } else {
-      formValidation.value.isUserRegistered = false
-    }
   } else {
     formValidation.value.isEmailValid = false
-  }
-}
-
-function validateName() {
-  if (formData.value.name) {
-    formValidation.value.isNameValid = true
-  } else {
-    formValidation.value.isNameValid = false
   }
 }
 

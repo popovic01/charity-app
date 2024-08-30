@@ -19,14 +19,6 @@
             <p v-if="!formValidation.isEmailValid && isFormSubmitted" class="text-danger">
               Email is not valid.
             </p>
-            <p
-              v-if="
-                !formValidation.isUserRegistered && formValidation.isEmailValid && isFormSubmitted
-              "
-              class="text-danger"
-            >
-              A user with that email address doesn't exists.
-            </p>
             <div class="col-md-7 mb-2">
               <label for="password" class="form-label">Password</label>
               <input
@@ -39,18 +31,21 @@
               <p v-if="!formValidation.isPasswordEntered && isFormSubmitted" class="text-danger">
                 Password is required.
               </p>
-              <p
-                v-if="
-                  !formValidation.isPasswordCorrect &&
-                  formValidation.isPasswordEntered &&
-                  formValidation.isUserRegistered &&
-                  isFormSubmitted
-                "
-                class="text-danger"
-              >
-                Password is not correct.
-              </p>
             </div>
+            <p v-if="formValidation.invalidCredentials && isFormSubmitted" class="text-danger">
+              Your login credentials are not valid.
+            </p>
+            <p
+              v-if="
+                formValidation.isPasswordEntered &&
+                formValidation.isEmailValid &&
+                !formValidation.default &&
+                isFormSubmitted
+              "
+              class="text-danger"
+            >
+              Something went wrong.
+            </p>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Sign in</button>
@@ -64,21 +59,13 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { encrypteData } from '../utils/passwordHash'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const router = useRouter()
 
 const emit = defineEmits(['login'])
 
 const isFormSubmitted = ref(false)
-
-const retrieveUsers = () => {
-  let users = localStorage.getItem('users')
-  return users ? JSON.parse(users) : []
-}
-
-const users = ref(retrieveUsers())
-const user = ref(null)
 
 const getInitialData = () => ({
   email: '',
@@ -88,8 +75,8 @@ const getInitialData = () => ({
 const getInitialValidation = () => ({
   isEmailValid: false,
   isPasswordEntered: false,
-  isPasswordCorrect: false,
-  isUserRegistered: false
+  invalidCredentials: false,
+  default: false
 })
 
 const formData = ref(getInitialData())
@@ -101,32 +88,44 @@ const submitForm = () => {
   validatePassword()
 
   //the validation is correct
-  if (
-    formValidation.value.isEmailValid &&
-    formValidation.value.isPasswordEntered &&
-    formValidation.value.isUserRegistered &&
-    formValidation.value.isPasswordCorrect
-  ) {
-    localStorage.setItem(
-      'currentUser',
-      JSON.stringify({ email: formData.value.email, isAdmin: user.value.isAdmin })
-    )
-    router.push('/')
-    emit('login')
-    clearForm()
+  if (formValidation.value.isEmailValid && formValidation.value.isPasswordEntered) {
+    login()
   }
 }
 
-function validateEmail() {
-  user.value = users.value.find((user) => user.email === formData.value.email)
+function login() {
+  const auth = getAuth()
+  signInWithEmailAndPassword(auth, formData.value.email, formData.value.password)
+    .then((data) => {
+      router.push('/')
+      clearForm()
+      formValidation.value.default = true
+      formValidation.value.invalidCredentials = false
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({
+          email: data.user.email,
+          isAdmin: data.user.email == 'admin@example.com' ? true : false
+        })
+      )
+      emit('login')
+    })
+    .catch((error) => {
+      switch (error.code) {
+        case 'auth/invalid-credential':
+          formValidation.value.invalidCredentials = true
+          break
+        default:
+          formValidation.value.default = false
+          break
+      }
+    })
+}
 
+function validateEmail() {
+  formValidation.value.default = true
   if (formData.value.email) {
     formValidation.value.isEmailValid = true
-    if (user.value) {
-      formValidation.value.isUserRegistered = true
-    } else {
-      formValidation.value.isUserRegistered = false
-    }
   } else {
     formValidation.value.isEmailValid = false
   }
@@ -135,14 +134,10 @@ function validateEmail() {
 function validatePassword() {
   if (formData.value.password) {
     formValidation.value.isPasswordEntered = true
-    if (user?.value?.password === encrypteData(formData.value.password)) {
-      formValidation.value.isPasswordCorrect = true
-    } else {
-      formValidation.value.isPasswordCorrect = false
-    }
   } else {
     formValidation.value.isPasswordEntered = false
   }
+  formValidation.value.default = true
 }
 
 function clearForm() {

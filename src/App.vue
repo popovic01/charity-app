@@ -1,9 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
-import { users } from '../src/assets/data/users.js'
 import { donationCampaigns } from '../src/assets/data/donationCampaigns'
-import { encrypteData } from './utils/passwordHash'
 
 const currentUser = ref(
   localStorage.getItem('currentUser') === null
@@ -11,20 +9,12 @@ const currentUser = ref(
     : JSON.parse(localStorage.getItem('currentUser'))
 )
 
-function saveUsers() {
-  if (!localStorage.getItem('users')) {
-    users.forEach((x) => (x.password = encrypteData(x.password)))
-    localStorage.setItem('users', JSON.stringify(users))
-  }
-}
-
 function saveCampaigns() {
   if (!localStorage.getItem('donationCampaigns')) {
     localStorage.setItem('donationCampaigns', JSON.stringify(donationCampaigns))
   }
 }
 
-saveUsers()
 saveCampaigns()
 
 function changeIsLoggedIn() {
