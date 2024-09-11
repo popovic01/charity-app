@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import { donationCampaigns } from '../src/assets/data/donationCampaigns'
+import { donations } from '../src/assets/data/donations'
 
 const currentUser = ref(
   localStorage.getItem('currentUser') === null
@@ -10,12 +11,15 @@ const currentUser = ref(
 )
 
 function saveCampaigns() {
-  if (!localStorage.getItem('donationCampaigns')) {
-    localStorage.setItem('donationCampaigns', JSON.stringify(donationCampaigns))
-  }
+  localStorage.setItem('donationCampaigns', JSON.stringify(donationCampaigns))
+}
+
+function saveDonations() {
+  localStorage.setItem('donations', JSON.stringify(donations))
 }
 
 saveCampaigns()
+saveDonations()
 
 function changeIsLoggedIn() {
   if (currentUser.value) {

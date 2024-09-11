@@ -48,7 +48,7 @@ const routes = [
         component: DonateNowView,
         meta: { requiresAuth: true, roles: ['user'] }
       },
-      { path: 'impact-reports', component: ReportsView },
+      { path: 'donations', component: ReportsView },
       { path: 'fundraising-campaigns', component: FundraisingCampaignsView },
       { path: 'fundraising-campaigns/:id', component: FundraisingCampaignDetailsView },
       {
