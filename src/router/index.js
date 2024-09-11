@@ -46,10 +46,7 @@ const routes = [
       {
         path: 'donate-now',
         component: DonateNowView,
-        // add this if you want to allow access only to auth users
-        meta: {
-          requiresAuth: true
-        }
+        meta: { requiresAuth: true, roles: ['user'] }
       },
       { path: 'impact-reports', component: ReportsView },
       { path: 'fundraising-campaigns', component: FundraisingCampaignsView },
