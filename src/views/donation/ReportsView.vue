@@ -1,9 +1,17 @@
 <template>
   <CoverImage :title="'Donations'"></CoverImage>
 
+  <div class="pt-3 text-center" v-if="currentUser.isAdmin">
+    <h3>Total donations: {{ totalDonations }}e</h3>
+  </div>
+
+  <div class="d-flex justify-content-center mt-2" v-if="!currentUser.isAdmin">
+    <Chart type="pie" :data="chartData" :options="chartOptions" class="w-full md:w-[30rem]" />
+  </div>
+
   <div class="p-4">
     <DataTable
-      :value="donationsData"
+      :value="donationsDataForUser"
       showGridlines
       stripedRows
       paginator
@@ -56,6 +64,7 @@ import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import DatePicker from 'primevue/datepicker'
+import Chart from 'primevue/chart'
 import { FilterMatchMode } from '@primevue/core/api'
 
 const convertDates = (donations) => {
@@ -70,7 +79,59 @@ const retrieveDonations = () => {
   return donations ? convertDates(JSON.parse(donations)) : []
 }
 
-const donationsData = ref(retrieveDonations())
+const filterDonations = () => {
+  let data = []
+  if (currentUser.value.isAdmin) {
+    data = donationsDataAll.value
+  } else {
+    donationsDataAll.value.forEach((x) => {
+      if (x.user == currentUser.value.email) data.push(x)
+    })
+  }
+  return data
+}
+
+const retrieveTotalDonations = () => {
+  let total = 0
+  donationsDataAll.value.forEach((x) => {
+    total += x.amount
+  })
+  return total
+}
+
+const retrieveTotalDonationsForUser = () => {
+  let total = 0
+  donationsDataForUser.value.forEach((x) => {
+    total += x.amount
+  })
+  return total
+}
+
+const retrieveCurrentUser = () => {
+  return JSON.parse(localStorage.getItem('currentUser'))
+}
+
+const setChartData = () => {
+  return {
+    labels: ['Your donations', 'Total donations'],
+    datasets: [
+      {
+        data: [totalDonationsForUser, totalDonations],
+        backgroundColor: ['#f28482', '#84a59d'],
+        hoverBackgroundColor: ['#EA3D3A', '#516D66']
+      }
+    ]
+  }
+}
+
+const currentUser = ref(retrieveCurrentUser())
+const donationsDataAll = ref(retrieveDonations())
+const donationsDataForUser = ref(filterDonations())
+const totalDonations = ref(retrieveTotalDonations())
+const totalDonationsForUser = ref(retrieveTotalDonationsForUser())
+
+const chartData = ref(setChartData())
+
 const filters = ref({
   user: { value: null, matchMode: FilterMatchMode.CONTAINS },
   amount: { value: null, matchMode: FilterMatchMode.EQUALS },

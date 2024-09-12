@@ -3,9 +3,9 @@
   <CoverImage :title="'Donate Now'"></CoverImage>
 
   <div class="container mt-5 mb-3">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h1 class="mb-3">Donate now</h1>
+    <div class="d-flex justify-content-center mb-3 w-100">
+      <div class="col-8">
+        <h1 class="mb-3 text-center">Donate now</h1>
 
         <form @submit.prevent="submitForm" id="donateForm">
           <div class="row mb-3">
@@ -42,7 +42,6 @@ import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 
 const toast = useToast()
-
 const showMessage = (title, description, severity) => {
   toast.add({
     severity: severity,
@@ -51,6 +50,14 @@ const showMessage = (title, description, severity) => {
     life: 2000
   })
 }
+
+const retrieveDonations = () => {
+  let donations = localStorage.getItem('donations')
+  return donations ? JSON.parse(donations) : []
+}
+
+const donations = ref(retrieveDonations())
+
 const router = useRouter()
 
 const isFormSubmitted = ref(false)
@@ -72,14 +79,27 @@ const submitForm = () => {
 
   //the validation is correct
   if (formValidation.value.isAmountValid) {
-    sendEmail()
-    // router.push('/')
+    const email = JSON.parse(localStorage.getItem('currentUser')).email
+    sendEmail(email)
+    saveDonation(email)
+    router.push('/donation/donations')
     clearForm()
   }
 }
 
-function sendEmail() {
-  const email = JSON.parse(localStorage.getItem('currentUser')).email
+function saveDonation(email) {
+  const today = new Date()
+  const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+  const donation = {
+    user: email,
+    amount: formData.value.amount,
+    date: formattedDate
+  }
+  donations.value.push(donation)
+  localStorage.setItem('donations', JSON.stringify(donations.value))
+}
+
+function sendEmail(email) {
   try {
     emailjs.send(
       'service_mzrtc4i',
