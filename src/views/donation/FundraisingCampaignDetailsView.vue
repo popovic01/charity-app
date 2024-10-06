@@ -1,17 +1,26 @@
 <template>
-  <Toast />
+  <Toast aria-live="polite" aria-atomic="true" />
+
   <div class="d-flex flex-column justify-content-center p-4">
     <h2>{{ campaign.name }}</h2>
     <p>{{ campaign.description }}</p>
 
-    <div id="carouselExample" class="carousel slide">
+    <div
+      id="carouselExample"
+      class="carousel slide"
+      aria-label="Fundraising campaign image carousel"
+    >
       <div class="carousel-inner">
         <div
           v-for="(image, index) in campaign.images"
           :key="index"
           :class="index === 0 ? 'carousel-item active' : 'carousel-item'"
         >
-          <img class="d-block w-100" :src="image.itemImageSrc" :alt="image.alt" />
+          <img
+            class="d-block w-100"
+            :src="image.itemImageSrc"
+            :alt="image.alt || 'Fundraising campaign image'"
+          />
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ image.title }}</h5>
           </div>
@@ -23,6 +32,7 @@
         type="button"
         data-bs-target="#carouselExample"
         data-bs-slide="prev"
+        aria-label="Previous slide"
       >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -32,6 +42,7 @@
         type="button"
         data-bs-target="#carouselExample"
         data-bs-slide="next"
+        aria-label="Next slide"
       >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
@@ -40,20 +51,31 @@
 
     <div class="d-flex flex-row gap-4 mt-2">
       <div>Average rating:</div>
-      <Rating v-model="campaign.averageRating" readonly />
+      <Rating v-model="campaign.averageRating" readonly aria-label="Campaign average rating" />
     </div>
+
     <div class="d-flex align-items-center flex-row gap-4 mt-2">
       <div>Rate this campaign:</div>
+
       <div v-if="loggedInUser != null && rating != 0" class="d-flex flex-row gap-3">
-        <Rating v-model="rating" disabled />
+        <Rating v-model="rating" disabled aria-label="Your rating for the campaign" />
         <div class="text-secondary">(You already rated this campaign)</div>
       </div>
+
       <div v-else-if="loggedInUser != null && rating == 0" class="d-flex flex-row gap-3">
-        <Rating v-model="newRating" />
-        <Button label="Rate" size="small" class="w-full" @click="rateCampaign()" />
+        <Rating v-model="newRating" aria-label="Select your rating for the campaign" />
+        <Button
+          label="Rate"
+          size="small"
+          class="w-full"
+          @click="rateCampaign()"
+          tabindex="0"
+          aria-label="Submit rating for the campaign"
+        />
       </div>
+
       <div v-else class="d-flex flex-row gap-3">
-        <Rating v-model="rating" readonly />
+        <Rating v-model="rating" readonly aria-label="Campaign rating" />
         <div class="text-secondary">(Only logged in users can rate campaigns)</div>
       </div>
     </div>

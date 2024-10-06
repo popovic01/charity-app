@@ -1,13 +1,22 @@
 <template>
-  <Toast />
-  <CoverImage :title="'Donate Now'"></CoverImage>
+  <Toast aria-live="polite" aria-atomic="true" />
+  <CoverImage :title="'Donate Now'" aria-label="Cover image for Donate Now page"></CoverImage>
 
   <div class="container mt-5 mb-3">
     <div class="d-flex justify-content-center mb-3 w-100">
       <div class="col-8">
         <h1 class="mb-3 text-center">Donate now</h1>
 
-        <form @submit.prevent="submitForm" id="donateForm">
+        <form
+          @submit.prevent="submitForm"
+          id="donateForm"
+          aria-describedby="donationFormInstructions"
+        >
+          <div id="donationFormInstructions" class="sr-only">
+            Please enter a donation amount of at least 5 euros.
+          </div>
+          <br />
+
           <div class="row mb-3">
             <div class="col-md-7 mb-2">
               <label for="amount" class="form-label">Amount</label>
@@ -18,14 +27,23 @@
                 id="amount"
                 v-model="formData.amount"
                 @input="() => validateAmount()"
+                aria-required="true"
+                aria-invalid="!formValidation.isAmount && isFormSubmitted"
               />
-              <p v-if="!formValidation.isAmount && isFormSubmitted" class="text-danger">
+              <p
+                v-if="!formValidation.isAmount && isFormSubmitted"
+                class="text-danger"
+                id="amountError"
+              >
                 Amount is required.
               </p>
             </div>
           </div>
+
           <div class="text-center">
-            <button type="submit" class="btn btn-primary me-2">Donate</button>
+            <button type="submit" class="btn btn-primary me-2" aria-label="Submit your donation">
+              Donate
+            </button>
           </div>
         </form>
       </div>
@@ -52,13 +70,6 @@ const showMessage = (title, description, severity) => {
     life: 2000
   })
 }
-
-const retrieveDonations = () => {
-  let donations = localStorage.getItem('donations')
-  return donations ? JSON.parse(donations) : []
-}
-
-const donations = ref(retrieveDonations())
 
 const router = useRouter()
 

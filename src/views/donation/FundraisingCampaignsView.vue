@@ -1,10 +1,13 @@
 <template>
-  <CoverImage :title="'Fundraising campaigns'"></CoverImage>
+  <CoverImage
+    :title="'Fundraising campaigns'"
+    aria-label="Cover Image for Fundraising Campaigns"
+  ></CoverImage>
 
   <div class="d-flex flex-wrap justify-content-center p-4">
     <Card v-for="campaign in campaigns" :key="campaign.id">
       <template #header>
-        <img alt="header" src="../../assets/images/logo.png" width="160" />
+        <img alt="Fundraising campaign logo" src="../../assets/images/logo.png" width="160" />
       </template>
       <template #title>{{ campaign.name }}</template>
       <template #subtitle>
@@ -19,10 +22,16 @@
       <template #footer>
         <div class="d-flex flex-row gap-2 mt-1">
           <div>Average rating:</div>
-          <Rating v-model="campaign.averageRating" readonly />
+          <Rating v-model="campaign.averageRating" readonly aria-label="Campaign average rating" />
         </div>
         <div class="flex gap-4 mt-3">
-          <Button label="See Details" class="w-full" @click="navigateToDetails(campaign.id)" />
+          <Button
+            label="See Details"
+            class="w-full"
+            @click="navigateToDetails(campaign.id)"
+            tabindex="0"
+            aria-label="See details about the fundraising campaign"
+          />
         </div>
       </template>
     </Card>

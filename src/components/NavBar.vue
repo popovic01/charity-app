@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <nav class="navbar navbar-expand-xl navbar-light bg-light" aria-label="Main navigation">
     <a class="navbar-brand" href="/">
-      <img src="../assets/images/logo.png" width="50" height="40" alt="logo" />
+      <img src="../assets/images/logo.png" width="50" height="40" alt="Website logo" />
     </a>
 
     <button
@@ -11,7 +11,7 @@
       data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
-      aria-label="Toggle navigation"
+      aria-label="Toggle navigation menu"
     >
       <span class="navbar-toggler-icon"></span>
     </button>

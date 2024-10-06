@@ -1,12 +1,20 @@
 <template>
-  <CoverImage :title="'Donations'"></CoverImage>
+  <CoverImage :title="'Donations'" aria-label="Cover Image for Donations"></CoverImage>
 
   <div class="pt-3 text-center" v-if="currentUser?.isAdmin">
     <h3>Total donations: {{ totalDonations }}e</h3>
   </div>
 
   <div class="d-flex justify-content-center mt-2" v-if="!currentUser?.isAdmin">
-    <Chart type="pie" :data="chartData" :options="chartOptions" class="w-full md:w-[30rem]" />
+    <Chart
+      type="pie"
+      :data="chartData"
+      :options="chartOptions"
+      class="w-full md:w-[30rem]"
+      aria-label="Donations distribution pie chart"
+      role="img"
+      tabindex="0"
+    />
   </div>
 
   <div class="p-4">
@@ -20,10 +28,17 @@
       v-model:filters="filters"
       filterDisplay="menu"
       :globalFilterFields="['user', 'amount', 'date']"
+      tabindex="0"
+      aria-label="Donation Data Table"
     >
       <Column field="user" header="User" sortable>
         <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" placeholder="Search by user" />
+          <InputText
+            v-model="filterModel.value"
+            placeholder="Search by user"
+            tabindex="0"
+            aria-label="Search by user input field"
+          />
         </template>
       </Column>
 
@@ -34,6 +49,8 @@
             mode="currency"
             currency="eur"
             placeholder="Search by amount"
+            tabindex="0"
+            aria-label="Search by amount input field"
           />
         </template>
       </Column>
@@ -47,6 +64,8 @@
             v-model="filterModel.value"
             dateFormat="mm/dd/yy"
             placeholder="Search by date"
+            tabindex="0"
+            aria-label="Search by date input field"
           />
         </template>
       </Column>

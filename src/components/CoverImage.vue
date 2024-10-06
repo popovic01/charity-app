@@ -1,7 +1,11 @@
 <template>
   <div class="img-wrapper">
-    <img src="../assets/images/aborigines.jpg" alt="Snow" class="w-100" />
-    <div class="centered text-uppercase">{{ title }}</div>
+    <img
+      src="../assets/images/aborigines.jpg"
+      alt="A group of Aborigines during a cultural activity in a snow-covered landscape."
+      class="w-100"
+    />
+    <div class="centered text-uppercase" aria-label="Donation campaign title">{{ title }}</div>
   </div>
 </template>
 
