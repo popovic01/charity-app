@@ -1,9 +1,8 @@
 <template>
   <CoverImage :title="'Traditional Practices'"></CoverImage>
-  <div class="container mt-5 mb-3" id="content">
-    <div>
+  <main class="container mt-5 mb-3" tabindex="0">
+    <div id="content" class="p-2">
       <h1 class="mb-4">Traditional Practices of Australian Indigenous Communities</h1>
-
       <p>
         Indigenous Australian communities have a rich cultural heritage that spans over 60,000
         years, with traditional practices playing a central role in their connection to the land,
@@ -12,8 +11,8 @@
         unique way of life.
       </p>
 
-      <div class="mb-5">
-        <h3>Healing and Medicine</h3>
+      <section class="mb-5" aria-labelledby="healing-and-medicine">
+        <h2 id="healing-and-medicine">Healing and Medicine</h2>
         <p>
           Indigenous healing practices are deeply rooted in the natural environment. Aboriginal and
           Torres Strait Islander peoples have long relied on traditional bush medicine, using native
@@ -22,10 +21,10 @@
           healers, known as "Ngangkari" in some communities, who use this knowledge to restore
           balance to both body and spirit.
         </p>
-      </div>
+      </section>
 
-      <div class="mb-5">
-        <h3>Connection to Country</h3>
+      <section class="mb-5" aria-labelledby="connection-to-country">
+        <h2 id="connection-to-country">Connection to Country</h2>
         <p>
           For Indigenous peoples, health is closely linked to their relationship with the land, or
           "Country." Traditional practices such as "Caring for Country" involve maintaining and
@@ -34,10 +33,10 @@
           rituals that honor the land, ancestors, and Dreamtime stories, which are foundational to
           their culture.
         </p>
-      </div>
+      </section>
 
-      <div class="mb-5">
-        <h3>Ceremonies and Spirituality</h3>
+      <section class="mb-5" aria-labelledby="ceremonies-and-spirituality">
+        <h2 id="ceremonies-and-spirituality">Ceremonies and Spirituality</h2>
         <p>
           Ceremonies are a vital aspect of traditional Indigenous practices, serving as ways to
           celebrate, mourn, heal, and connect with ancestors. Practices such as "Welcome to Country"
@@ -45,10 +44,10 @@
           burning native plants. These ceremonies not only offer healing but also foster a deep
           sense of community and continuity.
         </p>
-      </div>
+      </section>
 
-      <div class="mb-5">
-        <h3>Traditional Diets</h3>
+      <section class="mb-5" aria-labelledby="traditional-diets">
+        <h2 id="traditional-diets">Traditional Diets</h2>
         <p>
           Traditional diets of Indigenous Australians, often referred to as "Bush Tucker," have
           sustained their communities for millennia. These diets are rich in nutrient-dense foods
@@ -56,10 +55,10 @@
           The traditional diet is known for its benefits in preventing chronic diseases, promoting
           long-term health, and aligning with their cultural practices of sustainable living.
         </p>
-      </div>
+      </section>
 
-      <div class="mb-5">
-        <h3>Knowledge and Learning</h3>
+      <section class="mb-5" aria-labelledby="knowledge-and-learning">
+        <h2 id="knowledge-and-learning">Knowledge and Learning</h2>
         <p>
           The transmission of knowledge is an essential aspect of Indigenous culture. Elders play a
           significant role in teaching younger generations about the health practices, spiritual
@@ -67,24 +66,30 @@
           their communities. Storytelling, art, and dance are crucial to passing on this wisdom and
           maintaining a connection to cultural identity.
         </p>
-      </div>
+      </section>
 
-      <div class="mb-5">
-        <h3>Modern Recognition and Integration</h3>
+      <section class="mb-5" aria-labelledby="modern-recognition-and-integration">
+        <h2 id="modern-recognition-and-integration">Modern Recognition and Integration</h2>
         <p>
           There is growing recognition of the importance of integrating Indigenous knowledge and
           traditional practices into contemporary health frameworks. Many health professionals now
           collaborate with Indigenous healers to incorporate traditional methods alongside Western
           medicine, recognizing the value of cultural practices in promoting holistic well-being.
         </p>
-      </div>
+      </section>
     </div>
+
     <div class="text-center">
-      <button class="btn btn-primary" @click="downloadPractices()" id="downloadBtn">
+      <button
+        class="btn btn-primary"
+        @click="downloadPractices()"
+        id="downloadBtn"
+        aria-label="Download practices as PDF"
+      >
         Download practices
       </button>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>
