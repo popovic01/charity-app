@@ -40,6 +40,8 @@ import { useRouter } from 'vue-router'
 import emailjs from 'emailjs-com'
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import db from '../../firebase/init'
+import { collection, addDoc } from 'firebase/firestore'
 
 const toast = useToast()
 const showMessage = (title, description, severity) => {
@@ -87,16 +89,15 @@ const submitForm = () => {
   }
 }
 
-function saveDonation(email) {
+async function saveDonation(email) {
   const today = new Date()
   const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-  const donation = {
+
+  await addDoc(collection(db, 'donations'), {
     user: email,
     amount: formData.value.amount,
     date: formattedDate
-  }
-  donations.value.push(donation)
-  localStorage.setItem('donations', JSON.stringify(donations.value))
+  })
 }
 
 function sendEmail(email) {
