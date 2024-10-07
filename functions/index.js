@@ -9,10 +9,46 @@
  */
 
 const {onRequest} = require("firebase-functions/v2/https");
+const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const cors = require("cors")({origin: true});
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "mimica2001@gmail.com",
+    pass: "sitr uztd cevc idbl",
+  },
+});
 
 admin.initializeApp();
+
+exports.recieveDonation = functions.firestore
+    .document("donations/{donationId}")
+    .onCreate((snap, context) => {
+      const newDonation = snap.data();
+
+      const mailOptions = {
+        from: "ebcentre@gmail.com",
+        to: "mimica2001@gmail.com",
+        subject: "New Donation Received",
+        text: `A new donation has been received for the Indigenous Health Hub Foundation.
+        Amount: ${newDonation.amount}$.
+        Login as admin and visit the Admin Dashboard page to review the donation:
+        https://charity-app-nu.vercel.app/sign-in`,
+      };
+
+      return transporter.sendMail(mailOptions)
+          .then(() => {
+            console.log("Email sent successfully");
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+          });
+    });
 
 exports.retrieveDonations = onRequest((req, res) => {
   cors(req, res, async () => {
