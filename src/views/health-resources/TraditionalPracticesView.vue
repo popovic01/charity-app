@@ -1,7 +1,7 @@
 <template>
   <CoverImage :title="'Traditional Practices'"></CoverImage>
-  <main class="container mt-5 mb-3" tabindex="0">
-    <div id="content" class="p-2">
+  <main class="mt-3 mb-3" tabindex="0">
+    <div id="content" class="p-4">
       <h1 class="mb-4">Traditional Practices of Australian Indigenous Communities</h1>
       <p>
         Indigenous Australian communities have a rich cultural heritage that spans over 60,000
@@ -11,7 +11,7 @@
         unique way of life.
       </p>
 
-      <section class="mb-5" aria-labelledby="healing-and-medicine">
+      <section class="mb-4" aria-labelledby="healing-and-medicine">
         <h2 id="healing-and-medicine">Healing and Medicine</h2>
         <p>
           Indigenous healing practices are deeply rooted in the natural environment. Aboriginal and
@@ -23,7 +23,7 @@
         </p>
       </section>
 
-      <section class="mb-5" aria-labelledby="connection-to-country">
+      <section class="mb-4" aria-labelledby="connection-to-country">
         <h2 id="connection-to-country">Connection to Country</h2>
         <p>
           For Indigenous peoples, health is closely linked to their relationship with the land, or
@@ -35,7 +35,7 @@
         </p>
       </section>
 
-      <section class="mb-5" aria-labelledby="ceremonies-and-spirituality">
+      <section class="mb-4" aria-labelledby="ceremonies-and-spirituality">
         <h2 id="ceremonies-and-spirituality">Ceremonies and Spirituality</h2>
         <p>
           Ceremonies are a vital aspect of traditional Indigenous practices, serving as ways to
@@ -46,7 +46,7 @@
         </p>
       </section>
 
-      <section class="mb-5" aria-labelledby="traditional-diets">
+      <section class="mb-4" aria-labelledby="traditional-diets">
         <h2 id="traditional-diets">Traditional Diets</h2>
         <p>
           Traditional diets of Indigenous Australians, often referred to as "Bush Tucker," have
@@ -57,7 +57,7 @@
         </p>
       </section>
 
-      <section class="mb-5" aria-labelledby="knowledge-and-learning">
+      <section class="mb-4" aria-labelledby="knowledge-and-learning">
         <h2 id="knowledge-and-learning">Knowledge and Learning</h2>
         <p>
           The transmission of knowledge is an essential aspect of Indigenous culture. Elders play a
@@ -68,7 +68,7 @@
         </p>
       </section>
 
-      <section class="mb-5" aria-labelledby="modern-recognition-and-integration">
+      <section class="mb-3" aria-labelledby="modern-recognition-and-integration">
         <h2 id="modern-recognition-and-integration">Modern Recognition and Integration</h2>
         <p>
           There is growing recognition of the importance of integrating Indigenous knowledge and
@@ -79,14 +79,21 @@
       </section>
     </div>
 
-    <div class="text-center">
+    <div class="d-flex gap-3 justify-content-center mb-2">
       <button
         class="btn btn-primary"
-        @click="downloadPractices()"
-        id="downloadBtn"
+        @click="downloadPracticesPDF()"
         aria-label="Download practices as PDF"
       >
-        Download practices
+        Download practices as PDF
+      </button>
+
+      <button
+        class="btn btn-primary"
+        @click="downloadPracticesCSV()"
+        aria-label="Download practices as CSV"
+      >
+        Download practices as CSV
       </button>
     </div>
   </main>
@@ -97,7 +104,7 @@ import CoverImage from '../../components/CoverImage.vue'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 
-function downloadPractices() {
+function downloadPracticesPDF() {
   const content = document.getElementById('content')
 
   html2canvas(content, {
@@ -125,6 +132,30 @@ function downloadPractices() {
 
     pdf.save('traditional_practices.pdf')
   })
+}
+
+function downloadPracticesCSV() {
+  const sections = document.querySelectorAll('#content section')
+
+  const csvRows = [['Practice', 'Description']]
+
+  sections.forEach((el) => {
+    const practice = el.querySelector('h2').innerText.trim()
+    const description = el.querySelector('p').innerText.trim()
+    csvRows.push([practice, description])
+  })
+
+  const csvContent = csvRows.map((row) => row.join(',')).join('\n')
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+
+  const link = document.createElement('a')
+  const url = URL.createObjectURL(blob)
+  link.setAttribute('href', url)
+  link.setAttribute('download', 'traditional_practices.csv')
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
 }
 </script>
 
