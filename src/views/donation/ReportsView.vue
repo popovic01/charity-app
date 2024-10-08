@@ -5,6 +5,9 @@
     <h3>Total donations: {{ totalDonations }}e</h3>
   </div>
 
+  <h5 class="m-3 text-center" v-if="!currentUser?.isAdmin">
+    The chart below shows your donations compared to the total donations.
+  </h5>
   <div class="d-flex justify-content-center mt-2" v-if="!currentUser?.isAdmin">
     <Chart
       type="pie"
@@ -18,6 +21,7 @@
   </div>
 
   <div class="p-4">
+    <h5 class="mb-2">Your donations</h5>
     <DataTable
       :value="donationsDataForUser"
       showGridlines
@@ -31,7 +35,7 @@
       tabindex="0"
       aria-label="Donation Data Table"
     >
-      <Column field="user" header="User" sortable>
+      <Column field="user" header="User" sortable v-if="currentUser?.isAdmin">
         <template #filter="{ filterModel }">
           <InputText
             v-model="filterModel.value"
