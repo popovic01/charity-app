@@ -2,7 +2,7 @@
   <CoverImage :title="'Donations'" aria-label="Cover Image for Donations"></CoverImage>
 
   <div class="pt-3 text-center" v-if="currentUser?.isAdmin">
-    <h3>Total donations: {{ totalDonations }}e</h3>
+    <h1>Total donations: {{ totalDonations }}e</h1>
   </div>
 
   <h5 class="m-3 text-center" v-if="!currentUser?.isAdmin">
@@ -158,3 +158,9 @@ onMounted(async () => {
   chartData.value = setChartData(totalDonationsForUser.value, totalDonations.value)
 })
 </script>
+
+<style>
+#pv_id_4 > span {
+  font-weight: 600 !important;
+}
+</style>
