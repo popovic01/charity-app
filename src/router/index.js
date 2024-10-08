@@ -7,10 +7,6 @@ import DonationView from '../views/donation/DonationView.vue'
 import ReportsView from '../views/donation/ReportsView.vue'
 import FundraisingCampaignsView from '../views/donation/FundraisingCampaignsView.vue'
 import FundraisingCampaignDetailsView from '../views/donation/FundraisingCampaignDetailsView.vue'
-import AboutUsView from '../views/about-us/AboutUsView.vue'
-import OurTeamView from '../views/about-us/OurTeamView.vue'
-import ContactUsView from '../views/about-us/ContactUsView.vue'
-import FAQsView from '../views/about-us/FAQsView.vue'
 import CommunitySupportView from '../views/community-support/CommunitySupportView.vue'
 import SupportGroupsView from '../views/community-support/SupportGroupsView.vue'
 import CommunityEventsView from '../views/community-support/CommunityEventsView.vue'
@@ -30,6 +26,7 @@ import SocioEconomicIssuesView from '../views/non-indigenous-awareness/SocioEcon
 import DonateNowView from '../views/donation/DonateNowView.vue'
 import AddCampaign from '../views/donation/AddCampaignView.vue'
 import FobiddenView from '../views/FobiddenView.vue'
+import AdminDashboard from '@/views/AdminDashboard.vue'
 
 const routes = [
   {
@@ -59,13 +56,9 @@ const routes = [
     ]
   },
   {
-    path: '/about-us',
-    component: AboutUsView,
-    children: [
-      { path: 'our-team', component: OurTeamView },
-      { path: 'contact-us', component: ContactUsView },
-      { path: 'faqs', component: FAQsView }
-    ]
+    path: '/admin-dashboard',
+    component: AdminDashboard,
+    meta: { requiresAuth: true, roles: ['admin'] }
   },
   {
     path: '/community-support',

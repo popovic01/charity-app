@@ -26,6 +26,23 @@ const transporter = nodemailer.createTransport({
 
 admin.initializeApp();
 
+exports.getAllUsers = functions.https.onCall(async (data, context) => {
+  try {
+    const users = [];
+    const listUsersResult = await admin.auth().listUsers(100);
+    listUsersResult.users.forEach((userRecord) => {
+      const userEmail = userRecord.email;
+      if (userEmail !== "admin@example.com") {
+        users.push({email: userEmail});
+      }
+    });
+    return {users};
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw new functions.https.HttpsError("internal", "Unable to retrieve users");
+  }
+});
+
 exports.recieveDonation = functions.firestore
     .document("donations/{donationId}")
     .onCreate((snap, context) => {

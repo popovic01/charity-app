@@ -164,25 +164,8 @@
           </ul>
         </li>
 
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="aboutUsDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutUsDropdown">
-            <li><a class="dropdown-item" href="/about-us">Overview</a></li>
-            <li><a class="dropdown-item" href="/about-us/our-team">Our team</a></li>
-            <li><a class="dropdown-item" href="/about-us/contact-us">Contact us</a></li>
-            <li>
-              <a class="dropdown-item" href="/about-us/faqs">FAQs</a>
-            </li>
-          </ul>
+        <li v-if="currentUser?.isAdmin" class="nav-item">
+          <a class="nav-link" href="/admin-dashboard">Admin dashboard</a>
         </li>
       </ul>
     </div>
