@@ -16,7 +16,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="/">Home</a>
@@ -34,7 +34,7 @@
             Health Resources
           </a>
           <ul class="dropdown-menu" aria-labelledby="healthResourcesDropdown">
-            <li><a class="dropdown-item" href="/health-resources">Overview</a></li>
+            <li><a class="dropdown-item" href="/health-resources">Health Resources Overview</a></li>
             <li>
               <a class="dropdown-item" href="/health-resources/healthcare-providers"
                 >Healthcare Providers</a
@@ -63,7 +63,11 @@
             Educational Materials
           </a>
           <ul class="dropdown-menu" aria-labelledby="educationalMaterialsDropdown">
-            <li><a class="dropdown-item" href="/educational-materials">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/educational-materials"
+                >Educational Materials Overview</a
+              >
+            </li>
             <li>
               <a class="dropdown-item" href="/educational-materials/mental-health">Mental Health</a>
             </li>
@@ -90,7 +94,9 @@
             Community Support
           </a>
           <ul class="dropdown-menu" aria-labelledby="communitySupportDropdown">
-            <li><a class="dropdown-item" href="/community-support">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/community-support">Community Support Overview</a>
+            </li>
             <li>
               <a class="dropdown-item" href="/community-support/support-groups">Support Groups</a>
             </li>
@@ -114,7 +120,11 @@
             Non-Indigenous Awareness
           </a>
           <ul class="dropdown-menu" aria-labelledby="nonIndigenousAwarenessDropdown">
-            <li><a class="dropdown-item" href="/non-indigenous-awareness">Overview</a></li>
+            <li>
+              <a class="dropdown-item" href="/non-indigenous-awareness"
+                >Non-Indigenous Awareness Overview</a
+              >
+            </li>
             <li>
               <a class="dropdown-item" href="/non-indigenous-awareness/case-studies"
                 >Case studies</a
@@ -150,7 +160,7 @@
             Donation Platform
           </a>
           <ul class="dropdown-menu" aria-labelledby="donationPlatformDropdown">
-            <li><a class="dropdown-item" href="/donation">Overview</a></li>
+            <li><a class="dropdown-item" href="/donation">Donation Platform Overview</a></li>
             <li><a class="dropdown-item" href="/donation/donate-now">Donate Now</a></li>
             <li><a class="dropdown-item" href="/donation/donations">Donations</a></li>
             <li v-if="currentUser?.isAdmin">
