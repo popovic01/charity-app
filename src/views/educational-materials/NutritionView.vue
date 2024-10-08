@@ -1,7 +1,7 @@
 <template>
   <CoverImage :title="'Nutrition'"></CoverImage>
   <div class="container mt-3">
-    <h2>Nutrition Information</h2>
+    <h1>Nutrition Information</h1>
     <div class="form-group">
       <textarea
         v-model="userInput"
@@ -64,4 +64,8 @@ const fetchNutritionInfo = async () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+textarea {
+  border: 0.15rem solid red !important;
+}
+</style>
