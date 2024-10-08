@@ -144,4 +144,8 @@ function clearForm() {
 }
 </script>
 
-<style></style>
+<style>
+input {
+  border: 0.15rem solid red !important;
+}
+</style>
