@@ -5,9 +5,9 @@
     <h1>Total donations: {{ totalDonations }}e</h1>
   </div>
 
-  <h5 class="m-3 text-center" v-if="!currentUser?.isAdmin">
+  <h1 class="m-3 text-center" v-if="!currentUser?.isAdmin">
     The chart below shows your donations compared to the total donations.
-  </h5>
+  </h1>
   <div class="d-flex justify-content-center mt-2" v-if="!currentUser?.isAdmin">
     <Chart
       type="pie"
@@ -162,5 +162,9 @@ onMounted(async () => {
 <style>
 #pv_id_4 > span {
   font-weight: 600 !important;
+}
+
+h1 {
+  font-size: 22.6px;
 }
 </style>

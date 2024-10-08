@@ -2,7 +2,7 @@
   <CoverImage :title="'Admin Dashboard'" aria-label="Cover Image for Admin Dashboard"></CoverImage>
 
   <div class="pt-3 text-center">
-    <h3>Total number of users: {{ totalUsers }}</h3>
+    <h1>Total number of users: {{ totalUsers }}</h1>
   </div>
 
   <div class="p-4">
@@ -74,3 +74,9 @@ onMounted(async () => {
   await retrieveUsers()
 })
 </script>
+
+<style>
+h1 {
+  font-size: 22.6px;
+}
+</style>
