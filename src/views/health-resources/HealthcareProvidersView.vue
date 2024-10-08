@@ -124,4 +124,16 @@ export default {
   > svg {
   display: none !important;
 }
+
+input[type='text'] {
+  border: 0.15rem solid red !important;
+}
+
+div.mapbox-directions-profile.mapbox-directions-component-keyline.mapbox-directions-clearfix {
+  background: rgb(81, 76, 76) !important;
+
+  label {
+    color: white;
+  }
+}
 </style>
