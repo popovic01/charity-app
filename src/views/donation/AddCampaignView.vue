@@ -20,6 +20,7 @@
                 id="name"
                 v-model="formData.name"
                 @input="() => validateTitle()"
+                autocomplete="title"
                 aria-required="true"
                 aria-invalid="!formValidation.isTitleValid && isFormSubmitted"
               />
@@ -243,4 +244,8 @@ function clearForm() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+textarea {
+  border: 0.15rem solid red !important;
+}
+</style>

@@ -1,9 +1,7 @@
 <template>
-  <CoverImage
-    :title="'Fundraising campaigns'"
-    aria-label="Cover Image for Fundraising Campaigns"
-  ></CoverImage>
+  <CoverImage aria-label="Cover Image for Fundraising Campaigns"></CoverImage>
 
+  <h1 class="d-flex justify-content-center m-3">Fundraising Campaigns</h1>
   <div class="d-flex flex-wrap justify-content-center p-4">
     <Card v-for="campaign in campaigns" :key="campaign.id">
       <template #header>
@@ -79,5 +77,9 @@ function navigateToDetails(id) {
 
 .p-card-title {
   height: 4rem;
+}
+
+.p-button {
+  background: #0e3e0c !important;
 }
 </style>
