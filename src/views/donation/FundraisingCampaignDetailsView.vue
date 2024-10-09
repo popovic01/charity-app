@@ -130,7 +130,6 @@ function getRating() {
 }
 
 function getCampaignDetails() {
-  //   console.log(router.currentRoute.value.params.id)
   campaignId.value = router.currentRoute.value.params.id
   donationCampaigns.value = JSON.parse(localStorage.getItem('donationCampaigns'))
   campaign.value = donationCampaigns.value.find((x) => x.id == campaignId.value)

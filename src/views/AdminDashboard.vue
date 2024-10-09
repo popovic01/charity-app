@@ -1,11 +1,15 @@
 <template>
   <CoverImage :title="'Admin Dashboard'" aria-label="Cover Image for Admin Dashboard"></CoverImage>
 
-  <div class="pt-3 text-center">
+  <div v-if="isLoading" class="text-center mt-5">
+    <ProgressSpinner />
+  </div>
+
+  <div class="pt-3 text-center" v-if="!isLoading">
     <h1>Total number of users: {{ totalUsers }}</h1>
   </div>
 
-  <div class="p-4">
+  <div class="p-4" v-if="!isLoading">
     <DataTable
       :value="users"
       showGridlines
@@ -42,11 +46,14 @@ import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
 import { FilterMatchMode } from '@primevue/core/api'
-import { getFunctions, httpsCallable } from 'firebase/functions' // Import Firebase functions
+import { getFunctions, httpsCallable } from 'firebase/functions'
+import ProgressSpinner from 'primevue/progressspinner'
+
+const isLoading = ref(true)
 
 const retrieveUsers = async () => {
   const functions = getFunctions()
-  const getAllUsers = httpsCallable(functions, 'getAllUsers') // Firebase callable function
+  const getAllUsers = httpsCallable(functions, 'getAllUsers')
 
   try {
     const result = await getAllUsers()
@@ -60,6 +67,8 @@ const retrieveUsers = async () => {
   } catch (err) {
     console.error('Error fetching users: ', err)
     return []
+  } finally {
+    isLoading.value = false
   }
 }
 

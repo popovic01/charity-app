@@ -1,14 +1,23 @@
 <template>
   <CoverImage :title="'Donations'" aria-label="Cover Image for Donations"></CoverImage>
 
-  <div class="pt-3 text-center" v-if="currentUser?.isAdmin">
+  <div v-if="isLoading" class="text-center mt-5">
+    <ProgressSpinner />
+  </div>
+
+  <div class="pt-3 text-center" v-if="currentUser?.isAdmin && !isLoading">
     <h1>Total donations: {{ totalDonations }}e</h1>
   </div>
 
-  <h1 class="m-3 text-center" v-if="!currentUser?.isAdmin">
+  <div class="pt-3 text-center" v-if="!currentUser && !isLoading">
+    <h1>Total donations: {{ totalDonations }}e</h1>
+  </div>
+
+  <h1 class="m-3 text-center" v-if="!currentUser?.isAdmin && !isLoading">
     The chart below shows your donations compared to the total donations.
   </h1>
-  <div class="d-flex justify-content-center mt-2" v-if="!currentUser?.isAdmin">
+
+  <div class="d-flex justify-content-center mt-2" v-if="!currentUser?.isAdmin && !isLoading">
     <Chart
       type="pie"
       :data="chartData"
@@ -20,7 +29,7 @@
     />
   </div>
 
-  <div class="p-4">
+  <div class="p-4" v-if="!isLoading">
     <h5 class="mb-2">Your donations</h5>
     <DataTable
       :value="donationsDataForUser"
@@ -90,6 +99,9 @@ import DatePicker from 'primevue/datepicker'
 import Chart from 'primevue/chart'
 import { FilterMatchMode } from '@primevue/core/api'
 import axios from 'axios'
+import ProgressSpinner from 'primevue/progressspinner'
+
+const isLoading = ref(true)
 
 const convertDates = async (donations) => {
   return donations.map((donation) => ({
@@ -106,6 +118,8 @@ const retrieveDonations = async () => {
   } catch (err) {
     console.error('Error fetching donations: ', err)
     return []
+  } finally {
+    isLoading.value = false
   }
 }
 
