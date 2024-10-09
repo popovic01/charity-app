@@ -7,7 +7,7 @@
       showGridlines
       stripedRows
       paginator
-      :rows="5"
+      :rows="10"
       :rowsPerPageOptions="[1, 5, 10, 20, 50]"
       v-model:filters="filters"
       filterDisplay="menu"
