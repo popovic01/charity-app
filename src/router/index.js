@@ -7,22 +7,12 @@ import DonationView from '../views/donation/DonationView.vue'
 import ReportsView from '../views/donation/ReportsView.vue'
 import FundraisingCampaignsView from '../views/donation/FundraisingCampaignsView.vue'
 import FundraisingCampaignDetailsView from '../views/donation/FundraisingCampaignDetailsView.vue'
-import CommunitySupportView from '../views/community-support/CommunitySupportView.vue'
-import SupportGroupsView from '../views/community-support/SupportGroupsView.vue'
-import CommunityEventsView from '../views/community-support/CommunityEventsView.vue'
 import EducationalMaterialsView from '../views/educational-materials/EducationalMaterialsView.vue'
-import MentalHealthView from '../views/educational-materials/MentalHealthView.vue'
 import NutritionView from '../views/educational-materials/NutritionView.vue'
-import PreventiveCareView from '../views/educational-materials/PreventiveCareView.vue'
 import HealthResourcesView from '../views/health-resources/HealthResourcesView.vue'
 import TraditionalPracticesView from '../views/health-resources/TraditionalPracticesView.vue'
 import SymptomCheckerView from '../views/health-resources/SymptomCheckerView.vue'
 import HealthcareProvidersView from '../views/health-resources/HealthcareProvidersView.vue'
-import NonIndigenousAwarenessView from '../views/non-indigenous-awareness/NonIndigenousAwarenessView.vue'
-import CaseStudiesView from '../views/non-indigenous-awareness/CaseStudiesView.vue'
-import CulturalPreservationView from '../views/non-indigenous-awareness/CulturalPreservationView.vue'
-import HealthDisparitiesView from '../views/non-indigenous-awareness/HealthDisparitiesView.vue'
-import SocioEconomicIssuesView from '../views/non-indigenous-awareness/SocioEconomicIssuesView.vue'
 import DonateNowView from '../views/donation/DonateNowView.vue'
 import AddCampaign from '../views/donation/AddCampaignView.vue'
 import FobiddenView from '../views/FobiddenView.vue'
@@ -61,21 +51,9 @@ const routes = [
     meta: { requiresAuth: true, roles: ['admin'] }
   },
   {
-    path: '/community-support',
-    component: CommunitySupportView,
-    children: [
-      { path: 'community-events', component: CommunityEventsView },
-      { path: 'support-groups', component: SupportGroupsView }
-    ]
-  },
-  {
     path: '/educational-materials',
     component: EducationalMaterialsView,
-    children: [
-      { path: 'mental-health', component: MentalHealthView },
-      { path: 'nutrition', component: NutritionView },
-      { path: 'preventive-care', component: PreventiveCareView }
-    ]
+    children: [{ path: 'nutrition', component: NutritionView }]
   },
   {
     path: '/health-resources',
@@ -84,16 +62,6 @@ const routes = [
       { path: 'healthcare-providers', component: HealthcareProvidersView },
       { path: 'symptom-checker', component: SymptomCheckerView },
       { path: 'traditional-practices', component: TraditionalPracticesView }
-    ]
-  },
-  {
-    path: '/non-indigenous-awareness',
-    component: NonIndigenousAwarenessView,
-    children: [
-      { path: 'case-studies', component: CaseStudiesView },
-      { path: 'cultural-preservation', component: CulturalPreservationView },
-      { path: 'health-disparities', component: HealthDisparitiesView },
-      { path: 'socio-economic-issues', component: SocioEconomicIssuesView }
     ]
   }
 ]
