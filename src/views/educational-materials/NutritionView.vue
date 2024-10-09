@@ -33,12 +33,13 @@ import ProgressSpinner from 'primevue/progressspinner'
 
 const userInput = ref('')
 const response = ref(null)
-const isLoading = ref(true)
+const isLoading = ref(false)
 const error = ref(null)
 
 const fetchNutritionInfo = async () => {
   error.value = null
   response.value = null
+  isLoading.value = true
 
   try {
     const apiKey = 'AIzaSyCQsPFq-QzVKJr5amAx6xBH7BZ-_ccm3vQ'
