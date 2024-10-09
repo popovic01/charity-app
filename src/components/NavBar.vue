@@ -88,7 +88,9 @@
           <ul class="dropdown-menu" aria-labelledby="donationPlatformDropdown">
             <li><a class="dropdown-item" href="/donation">Donation Platform Overview</a></li>
             <li><a class="dropdown-item" href="/donation/donate-now">Donate Now</a></li>
-            <li><a class="dropdown-item" href="/donation/donations">Donations</a></li>
+            <li>
+              <a class="dropdown-item" href="/donation/donations" v-if="currentUser">Donations</a>
+            </li>
             <li v-if="currentUser?.isAdmin">
               <a class="dropdown-item" href="/donation/add-campaign">Add campaign</a>
             </li>
