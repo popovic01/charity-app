@@ -158,5 +158,3 @@ function downloadPracticesCSV() {
   document.body.removeChild(link)
 }
 </script>
-
-<style></style>

@@ -17,7 +17,7 @@ function isOverview() {
 }
 </script>
 
-<style>
+<style scoped>
 .img-wrapper {
   position: relative;
   text-align: center;

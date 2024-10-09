@@ -159,7 +159,7 @@ onMounted(async () => {
 })
 </script>
 
-<style>
+<style scoped>
 #pv_id_4 > span {
   font-weight: 600 !important;
 }
