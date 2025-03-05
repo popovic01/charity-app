@@ -1,35 +1,31 @@
-# charity-app
+# Charity App
 
-This template should help get you started developing with Vue 3 in Vite.
+### Overview
 
-## Recommended IDE Setup
+This is a student project developed to provide information about Indigenous communities in Australia. The application offers various features, including user authentication, location-based services, and email communication.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Tech Stack
 
-## Customize configuration
+- Vue: Frontend framework for building the user interface.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Firebase Authentication: Manages user authentication and sign-in processes.
 
-## Project Setup
+- Firebase Cloud Functions: Backend functions for handling authentication and CRUD operations.
 
-```sh
-npm install
-```
+- EmailJS: Enables email sending functionality without requiring a backend server.
 
-### Compile and Hot-Reload for Development
+- Mapbox: Provides interactive maps and geolocation features for displaying locations relevant to Indigenous communities.
 
-```sh
-npm run dev
-```
+### Features
 
-### Compile and Minify for Production
+- CRUD Operations: Users can create, read, update, and delete Donations related to Indigenous communities.
 
-```sh
-npm run build
-```
+- Authentication: Secure login and registration using Firebase Authentication.
 
-### Lint with [ESLint](https://eslint.org/)
+- Email Sending: Contact form integration using EmailJS to allow users to send emails directly from the app.
 
-```sh
-npm run lint
-```
+- Location-based Services: Mapbox integration for displaying Health Service locations and calculating distances.
+
+### License
+
+This project is open-source and available under the MIT License.
